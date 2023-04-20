@@ -10,9 +10,15 @@ namespace AEV7
     {
         private string clave;
 
-        public Administrador()
+        public Administrador(string nif, string nom, string ape,string clave) : base(nif,nom,ape)
         {
+            this.clave = clave;
+        }
 
+
+        public bool IniciarSesion(string clau)
+        {
+            return clave == clau;
         }
     }
 }
