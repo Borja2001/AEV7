@@ -14,6 +14,7 @@ namespace AEV7
         [STAThread]
         static void Main()
         {
+            //cAMBIOS REALIZADOS POR LAIA
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
