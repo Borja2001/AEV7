@@ -79,42 +79,43 @@ namespace AEV7
                 pbImagenPpal.Visible = false;
                 txtInformacion.Visible = true;
                 btnVolver.Visible = true;
-                //aqui mismo? si y hay que cerrarla despues de cada metodo o no se si podemos dejarla abierta hasta el final
 
-
-                //creo que si, si cerramos el reader
-                ConexionBD.AbrirConexion();
-                if (Empleado.Existe(txtNIF.Text))
+                string nif = txtNIF.Text;
+                nif = nif.Replace("-", "");
+                if (ConexionBD.Conexion != null) // sin hacer esto no se crea la instancia y no se abre
                 {
-                    DateTime? horaEntradaExistente = Empleado.HaEntrado(txtNIF.Text); //En teoría con el signo ? ya no habría problema
-                    if (horaEntradaExistente == DateTime.MinValue)
+                    ConexionBD.AbrirConexion();
+                    if (Empleado.Existe(nif))
                     {
-                        int entradaCorrecta = Empleado.FicharEntrada(txtNIF.Text);
-                        if (entradaCorrecta == 1)
+                        DateTime? horaEntradaExistente = Empleado.HaEntrado(nif); //En teoría con el signo ? ya no habría problema
+                        if (horaEntradaExistente == DateTime.MinValue)
                         {
-                            string horaEntrada = DateTime.Now.ToString("HH:mm");
-                            string mensaje = $"ENTRADA REALIZADA A LAS {horaEntrada} \n\r";
-                            mensaje += Empleado.InformacionPersona(txtNIF.Text);
-
-                            txtInformacion.Text = mensaje;
+                            int entradaCorrecta = Empleado.FicharEntrada(nif);
+                            if (entradaCorrecta == 1)
+                            {
+                                string horaEntrada = DateTime.Now.ToString("HH:mm");
+                                string mensaje = $"ENTRADA REALIZADA A LAS {horaEntrada} \n\r";
+                                mensaje += Empleado.InformacionPersona(nif);
+                                MessageBox.Show(mensaje);
+                                txtInformacion.Text = mensaje;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Algo ha ido mal");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Algo ha ido mal");
+                            MessageBox.Show($"El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}", "Entrada previamente realizada");
                         }
+
                     }
                     else
                     {
-                        MessageBox.Show($"El empleado con NIF {txtNIF.Text} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}", "Entrada previamente realizada");
+                        MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
                     }
-
+                    ConexionBD.CerrarConexion();
                 }
-                else
-                {
-                    MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                }
-                ConexionBD.CerrarConexion();
-
             }
         }
 
@@ -134,41 +135,45 @@ namespace AEV7
                 pbImagenPpal.Visible = false;
                 txtInformacion.Visible = true;
                 btnVolver.Visible = true;
-                ConexionBD.AbrirConexion();
-
-                if (Empleado.Existe(txtNIF.Text))
+                string nif = txtNIF.Text;
+                nif = nif.Replace("-", "");
+                if (ConexionBD.Conexion != null)
                 {
-                    DateTime horaEntradaExistente = Empleado.HaEntrado(txtNIF.Text);
-                    if (horaEntradaExistente != DateTime.MinValue)
-                    {
-                        int salidaCorrecta = Empleado.FicharSalida(txtNIF.Text);
-                        if (salidaCorrecta == 1)
-                        {
-                            // Se ha realizado correctamente la salida en el fichaje
-                            //Mostramos en el textbox Información del Empleado y la hora actual
-                            string horaSalida = DateTime.Now.ToString("HH:mm");
-                            string mensaje = $"SALIDA REALIZADA A LAS {horaSalida} \n\r";
-                            mensaje += Empleado.InformacionPersona(txtNIF.Text);
+                    ConexionBD.AbrirConexion();
 
-                            txtInformacion.Text = mensaje;
+                    if (Empleado.Existe(nif))
+                    {
+                        DateTime horaEntradaExistente = Empleado.HaEntrado(nif);
+                        if (horaEntradaExistente != DateTime.MinValue)
+                        {
+                            int salidaCorrecta = Empleado.FicharSalida(nif);
+                            if (salidaCorrecta == 1)
+                            {
+                                // Se ha realizado correctamente la salida en el fichaje
+                                //Mostramos en el textbox Información del Empleado y la hora actual
+                                string horaSalida = DateTime.Now.ToString("HH:mm");
+                                string mensaje = $"SALIDA REALIZADA A LAS {horaSalida} \n\r";
+                                mensaje += Empleado.InformacionPersona(nif);
+
+                                txtInformacion.Text = mensaje;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Algo ha ido mal");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Algo ha ido mal");
+                            MessageBox.Show($"El empleado con NIF {nif} no ha realizado aún su entrada.", "Entrada no realizada");
                         }
+
                     }
                     else
                     {
-                        MessageBox.Show($"El empleado con NIF {txtNIF.Text} no ha realizado aún su entrada.", "Entrada no realizada");
+                        MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
                     }
-
+                    ConexionBD.CerrarConexion();
                 }
-                else
-                {
-                    MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                }
-                ConexionBD.CerrarConexion();
-
             }
         }
 

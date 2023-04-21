@@ -103,7 +103,7 @@ namespace AEV7
         }
         public static string InformacionPersona(string nif)
         {
-            string consulta = string.Format("select * from empleado where nif_empl like ('@nif_empl')");
+            string consulta = string.Format("select * from empleados where nif  like ('@nif_empl')");
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
             comando.Parameters.AddWithValue("@nif_empl", nif);
             MySqlDataReader reader = comando.ExecuteReader();
@@ -111,7 +111,7 @@ namespace AEV7
             
             if (reader.Read()) // Se puede utilizar directamente el método Read() en vez de HasRows
             {
-               informacion="Nif: "+reader.GetString(0)+"\nNombre: "+reader.GetString(1)+"\nApellidos: " + reader.GetString(2) +"\nAdministrador: "+reader.GetBoolean(3).ToString();
+               informacion  ="Nif: "+reader.GetString(0)+"\nNombre: "+reader.GetString(1)+"\nApellidos: " + reader.GetString(2) +"\nAdministrador: "+reader.GetBoolean(3).ToString();
             }
             reader.Close();
             return informacion;
