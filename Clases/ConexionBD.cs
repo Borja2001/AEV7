@@ -26,7 +26,7 @@ namespace AEV7
                             instancia = new MySqlConnection();
 
                             string server = "server=127.0.0.1;";
-                            string database = "database=bdusuarios;";
+                            string database = "database=aev7;";
                             string usuario = "uid=root;";
                             string password = "pwd=;";
                             instancia.ConnectionString = server + database + usuario + password;

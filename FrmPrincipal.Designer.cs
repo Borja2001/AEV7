@@ -1,6 +1,6 @@
 ﻿namespace AEV7
 {
-    partial class FrmPPal
+    partial class FrmPrincipal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPPal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.txtNIF = new System.Windows.Forms.MaskedTextBox();
             this.lblNIF = new System.Windows.Forms.Label();
             this.Fecha_Hora = new System.Windows.Forms.Timer(this.components);
@@ -42,7 +42,9 @@
             this.pbImagenPpal = new System.Windows.Forms.PictureBox();
             this.txtInformacion = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.erroresPPal = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPpal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erroresPPal)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNIF
@@ -50,7 +52,7 @@
             this.txtNIF.Font = new System.Drawing.Font("Consolas", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNIF.Location = new System.Drawing.Point(370, 20);
             this.txtNIF.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNIF.Mask = "00000000-L";
+            this.txtNIF.Mask = "00000000-A";
             this.txtNIF.Name = "txtNIF";
             this.txtNIF.Size = new System.Drawing.Size(269, 64);
             this.txtNIF.TabIndex = 0;
@@ -106,6 +108,7 @@
             this.btnSalida.TabIndex = 5;
             this.btnSalida.Text = "Salida";
             this.btnSalida.UseVisualStyleBackColor = false;
+            this.btnSalida.Click += new System.EventHandler(this.btnSalida_Click);
             // 
             // btnPresencia
             // 
@@ -154,6 +157,7 @@
             // txtInformacion
             // 
             this.txtInformacion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtInformacion.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInformacion.Location = new System.Drawing.Point(29, 125);
             this.txtInformacion.Multiline = true;
             this.txtInformacion.Name = "txtInformacion";
@@ -176,7 +180,11 @@
             this.btnVolver.Visible = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // FrmPPal
+            // erroresPPal
+            // 
+            this.erroresPPal.ContainerControl = this;
+            // 
+            // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,10 +203,11 @@
             this.Controls.Add(this.txtNIF);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FrmPPal";
+            this.Name = "FrmPrincipal";
             this.Text = "Fichaje Empleados";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPpal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erroresPPal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +227,7 @@
         private System.Windows.Forms.PictureBox pbImagenPpal;
         private System.Windows.Forms.TextBox txtInformacion;
         private System.Windows.Forms.Button btnVolver;
+        public System.Windows.Forms.ErrorProvider erroresPPal;
     }
 }
 

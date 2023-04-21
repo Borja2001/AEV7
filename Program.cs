@@ -17,7 +17,7 @@ namespace AEV7
             //cAMBIOS REALIZADOS POR LAIA
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmPPal());
+            Application.Run(new FrmPrincipal());
         }
     }
 }
