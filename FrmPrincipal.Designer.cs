@@ -40,6 +40,8 @@
             this.btnPermanencia = new System.Windows.Forms.Button();
             this.btnMantenimiento = new System.Windows.Forms.Button();
             this.pbImagenPpal = new System.Windows.Forms.PictureBox();
+            this.txtInformacion = new System.Windows.Forms.TextBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPpal)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +94,7 @@
             this.btnEntrada.TabIndex = 4;
             this.btnEntrada.Text = "Entrada";
             this.btnEntrada.UseVisualStyleBackColor = false;
+            this.btnEntrada.Click += new System.EventHandler(this.btnEntrada_Click);
             // 
             // btnSalida
             // 
@@ -140,11 +143,37 @@
             // 
             // pbImagenPpal
             // 
+            this.pbImagenPpal.Image = global::AEV7.Properties.Resources.FLORIDA_UNIVERSITARIA;
             this.pbImagenPpal.Location = new System.Drawing.Point(29, 125);
             this.pbImagenPpal.Name = "pbImagenPpal";
             this.pbImagenPpal.Size = new System.Drawing.Size(610, 380);
+            this.pbImagenPpal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbImagenPpal.TabIndex = 9;
             this.pbImagenPpal.TabStop = false;
+            // 
+            // txtInformacion
+            // 
+            this.txtInformacion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtInformacion.Location = new System.Drawing.Point(29, 125);
+            this.txtInformacion.Multiline = true;
+            this.txtInformacion.Name = "txtInformacion";
+            this.txtInformacion.ReadOnly = true;
+            this.txtInformacion.Size = new System.Drawing.Size(610, 308);
+            this.txtInformacion.TabIndex = 10;
+            this.txtInformacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtInformacion.Visible = false;
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.BackColor = System.Drawing.Color.PowderBlue;
+            this.btnVolver.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolver.Location = new System.Drawing.Point(29, 459);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(610, 46);
+            this.btnVolver.TabIndex = 11;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = false;
+            this.btnVolver.Visible = false;
             // 
             // FrmPPal
             // 
@@ -152,6 +181,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightYellow;
             this.ClientSize = new System.Drawing.Size(1094, 566);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.txtInformacion);
             this.Controls.Add(this.pbImagenPpal);
             this.Controls.Add(this.btnMantenimiento);
             this.Controls.Add(this.btnPermanencia);
@@ -184,6 +215,8 @@
         private System.Windows.Forms.Button btnPermanencia;
         private System.Windows.Forms.Button btnMantenimiento;
         private System.Windows.Forms.PictureBox pbImagenPpal;
+        private System.Windows.Forms.TextBox txtInformacion;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
 

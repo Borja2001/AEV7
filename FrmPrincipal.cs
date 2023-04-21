@@ -39,5 +39,12 @@ namespace AEV7
 
             mantenimiento1.ShowDialog();
         }
+
+        private void btnEntrada_Click(object sender, EventArgs e)
+        {
+            pbImagenPpal.Visible = false;
+            txtInformacion.Visible = true;
+            btnVolver.Visible = true;
+        }
     }
 }
