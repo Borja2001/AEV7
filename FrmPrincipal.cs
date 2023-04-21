@@ -116,6 +116,12 @@ namespace AEV7
                     }
                     ConexionBD.CerrarConexion();
                 }
+                else
+                {
+                    MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
+                }
+                ConexionBD.Conexion.Close();
+
             }
         }
 
