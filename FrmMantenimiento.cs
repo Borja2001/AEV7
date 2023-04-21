@@ -6,27 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UtilidadesNIF;
 using System.Windows.Forms;
 
 namespace AEV7
 {
-    public partial class FrmPPal : Form
+    public partial class FrmMantenimiento : Form
     {
-        public FrmPPal()
+        public FrmMantenimiento()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
         {
-            lblFechaHora.Text = DateTime.Now.ToString("G");
-
+            this.Close();
         }
 
-        private void Fecha_Hora_Tick(object sender, EventArgs e)
+        private void btnSalir_Click(object sender, EventArgs e)
         {
-            lblFechaHora.Text = DateTime.Now.ToString("G");
+            Application.Exit();
         }
     }
 }
