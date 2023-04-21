@@ -83,7 +83,7 @@ namespace AEV7
 
 
                 //creo que si, si cerramos el reader
-                ConexionBD.Conexion.Open();
+                ConexionBD.AbrirConexion();
                 if (Empleado.Existe(txtNIF.Text))
                 {
                     DateTime? horaEntradaExistente = Empleado.HaEntrado(txtNIF.Text); //En teoría con el signo ? ya no habría problema
@@ -134,7 +134,7 @@ namespace AEV7
                 pbImagenPpal.Visible = false;
                 txtInformacion.Visible = true;
                 btnVolver.Visible = true;
-                ConexionBD.Conexion.Open();
+                ConexionBD.AbrirConexion();
 
                 if (Empleado.Existe(txtNIF.Text))
                 {
@@ -167,7 +167,7 @@ namespace AEV7
                 {
                     MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
                 }
-                ConexionBD.Conexion.Close();
+                ConexionBD.CerrarConexion();
 
             }
         }
