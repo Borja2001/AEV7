@@ -46,5 +46,12 @@ namespace AEV7
             txtInformacion.Visible = true;
             btnVolver.Visible = true;
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            pbImagenPpal.Visible = true;
+            txtInformacion.Visible = false;
+            btnVolver.Visible = false;
+        }
     }
 }

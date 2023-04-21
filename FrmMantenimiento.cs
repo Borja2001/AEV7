@@ -26,5 +26,16 @@ namespace AEV7
         {
             Application.Exit();
         }
+
+        private void chbAdministrador_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chbAdministrador.Checked == true)
+            {
+                txtContraseña.Enabled = true;
+            }else
+            {
+                txtContraseña.Enabled = false;
+            }
+        }
     }
 }
