@@ -32,20 +32,19 @@ namespace AEV7
             erroresPPal.Clear();
 
             string nif = txtNIF.Text;
-            nif = nif.Replace("-", "");//voy a ver
-            MessageBox.Show(nif); 
-            if (string.IsNullOrWhiteSpace(nif)) // solo sale error cuando  esta  vacio?
+            nif = nif.Replace("-", "");
+            if (string.IsNullOrWhiteSpace(nif)) 
             {
                 ok = false;
                 erroresPPal.SetError(txtNIF, "INTRODUZCA NIF");
             }else
             {
-                if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif)) //pon un messagebox para veer si se escribe bien el nif
+                if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif)) 
                 {
                     ok = false;
                     erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
                 }
-            } // Si meto el nif vacio y ejecuto no me entra en el primer if
+            } 
 
             
 
@@ -87,16 +86,17 @@ namespace AEV7
                     ConexionBD.AbrirConexion();
                     if (Empleado.Existe(nif))
                     {
-                        DateTime? horaEntradaExistente = Empleado.HaEntrado(nif); //En teoría con el signo ? ya no habría problema
+                        DateTime? horaEntradaExistente = Fichaje.HaEntrado(nif); //En teoría con el signo ? ya no habría problema
                         if (horaEntradaExistente == DateTime.MinValue)
                         {
-                            int entradaCorrecta = Empleado.FicharEntrada(nif);
+                            int entradaCorrecta =Fichaje.FicharEntrada(nif);
                             if (entradaCorrecta == 1)
                             {
                                 string horaEntrada = DateTime.Now.ToString("HH:mm");
+                                string infoPersona = Empleado.InformacionPersona(nif);
+
                                 string mensaje = $"ENTRADA REALIZADA A LAS {horaEntrada} \n\r";
-                                mensaje += Empleado.InformacionPersona(nif);
-                                MessageBox.Show(mensaje);
+                                mensaje += infoPersona;                                
                                 txtInformacion.Text = mensaje;
                             }
                             else
@@ -106,7 +106,10 @@ namespace AEV7
                         }
                         else
                         {
-                            MessageBox.Show($"El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}", "Entrada previamente realizada");
+                            string mensajeError = $"El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}";
+                            txtInformacion.Text = mensajeError;
+
+                            MessageBox.Show(mensajeError, "Entrada previamente realizada");
                         }
 
                     }
@@ -149,17 +152,18 @@ namespace AEV7
 
                     if (Empleado.Existe(nif))
                     {
-                        DateTime horaEntradaExistente = Empleado.HaEntrado(nif);
+                        DateTime horaEntradaExistente = Fichaje.HaEntrado(nif);
                         if (horaEntradaExistente != DateTime.MinValue)
                         {
-                            int salidaCorrecta = Empleado.FicharSalida(nif);
+                            int salidaCorrecta = Fichaje.FicharSalida(nif);
                             if (salidaCorrecta == 1)
                             {
                                 // Se ha realizado correctamente la salida en el fichaje
                                 //Mostramos en el textbox Información del Empleado y la hora actual
                                 string horaSalida = DateTime.Now.ToString("HH:mm");
+                                string infoPersona = Empleado.InformacionPersona(nif);
                                 string mensaje = $"SALIDA REALIZADA A LAS {horaSalida} \n\r";
-                                mensaje += Empleado.InformacionPersona(nif);
+                                mensaje += infoPersona;
 
                                 txtInformacion.Text = mensaje;
                             }
@@ -170,7 +174,9 @@ namespace AEV7
                         }
                         else
                         {
-                            MessageBox.Show($"El empleado con NIF {nif} no ha realizado aún su entrada.", "Entrada no realizada");
+                            string mensajeError = $"El empleado con NIF {nif} no ha realizado aún su entrada.";
+                            txtInformacion.Text = mensajeError;
+                            MessageBox.Show(mensajeError, "Entrada no realizada");
                         }
 
                     }
