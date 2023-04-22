@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,22 @@ namespace AEV7
         }
 
 
-        public bool IniciarSesion(string clau)
+        public static bool IniciarSesion(string clave, string nif)
         {
-            return clave == clau;
+            string consulta = "SELECT clave FROM Empleados WHERE nif = @nif_empl";
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+            comando.Parameters.AddWithValue("@nif_empl", nif); 
+            MySqlDataReader reader = comando.ExecuteReader();
+            
+            string claveBD = "";
+            if (reader.Read())
+            {
+                claveBD = reader.GetString(0);
+            }
+            reader.Close();
+
+            return claveBD == clave;
         }
+
     }
 }

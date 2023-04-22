@@ -120,6 +120,7 @@
             this.btnPresencia.TabIndex = 6;
             this.btnPresencia.Text = "Presencia";
             this.btnPresencia.UseVisualStyleBackColor = false;
+            this.btnPresencia.Click += new System.EventHandler(this.btnPresencia_Click);
             // 
             // btnPermanencia
             // 
@@ -131,6 +132,7 @@
             this.btnPermanencia.TabIndex = 7;
             this.btnPermanencia.Text = "Permanencia";
             this.btnPermanencia.UseVisualStyleBackColor = false;
+            this.btnPermanencia.Click += new System.EventHandler(this.btnPermanencia_Click);
             // 
             // btnMantenimiento
             // 
@@ -157,7 +159,7 @@
             // txtInformacion
             // 
             this.txtInformacion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtInformacion.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInformacion.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInformacion.Location = new System.Drawing.Point(29, 125);
             this.txtInformacion.Multiline = true;
             this.txtInformacion.Name = "txtInformacion";

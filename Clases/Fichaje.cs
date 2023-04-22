@@ -11,11 +11,16 @@ namespace AEV7
     {
         private string nif;
         private DateTime diaHoraEntrada;
-        private DateTime horaSalida;
+        private DateTime diaHoraSalida;
 
         public Fichaje(string nif)
         {
             diaHoraEntrada = DateTime.Today;
+        }
+        public Fichaje(string nif,DateTime fecha_entrada,DateTime fecha_salida)
+        {
+            diaHoraEntrada = fecha_entrada;
+            diaHoraSalida= fecha_salida;
         }
         public static int FicharEntrada(string nif)
         {
@@ -70,6 +75,32 @@ namespace AEV7
             reader.Close();
             return fecha;
 
+        }
+
+        public static string Permanencia(string nif, DateTime fecha_inicial, DateTime fecha_final)
+        {
+            string consulta = "SELECT dia_hora_entrada, dia_hora_salida FROM fichaje WHERE nif_empl = @nif_empl AND fecha BETWEEN @fecha_inicial AND @fecha_final";
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+            comando.Parameters.AddWithValue("@nif_empl", nif);
+            comando.Parameters.AddWithValue("@fecha_inicial", fecha_inicial);
+            comando.Parameters.AddWithValue("@fecha_final", fecha_final);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+            TimeSpan totalHoras = TimeSpan.Zero;
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    DateTime horaEntrada = reader.GetDateTime(0);
+                    DateTime horaSalida = reader.IsDBNull(1) ? DateTime.Now : reader.GetDateTime(1);
+                    totalHoras += horaEntrada.Subtract(horaSalida);
+                }
+            }
+
+            string horasFormateadas = string.Format("{0:00}:{1:00}", (int)totalHoras.TotalHours, totalHoras.Minutes);
+            reader.Close();
+
+            return horasFormateadas;
         }
     }
 }

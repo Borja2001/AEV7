@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace AEV7
             return num == 1;
         }
 
-        
+
 
 
         public static int AgregarEmpleado(Empleado em, bool administrador, string claveadmin)
@@ -77,44 +78,32 @@ namespace AEV7
 
             if (reader.Read())
             {
-                informacion = "\n\rNIF: " + reader.GetString(0) + "\n\rNombre: " + reader.GetString(1) + "\n\rApellidos: " + reader.GetString(2) + "\n\rAdministrador: " + reader.GetBoolean(3).ToString();
-            }
+                informacion = $"NIF: {reader.GetString(0)}{Environment.NewLine}Nombre: {reader.GetString(1)}{Environment.NewLine}Apellidos: {reader.GetString(2)}{Environment.NewLine}Administrador: ";//{reader.GetBoolean(3)};
+                if (reader.GetBoolean(3) == false) informacion += "NO eres administrador";
+                else informacion += "SI eres administrador";
+            } //asi?
 
             reader.Close();
             return informacion;
         }
 
-
-
-
-        public static string Permanencia(string nif, DateTime fecha_inicial, DateTime fecha_final)
+        public static string InformacionPresencia()
         {
-            string consulta = "SELECT dia_hora_entrada, dia_hora_salida FROM fichaje WHERE nif_empl = @nif_empl AND fecha BETWEEN @fecha_inicial AND @fecha_final";
+            string consulta = "SELECT e.nombre, e.apellidos, f.dia_hora_entrada FROM Empleados e INNER JOIN Fichaje f ON e.nif = f.nif_empl WHERE f.dia_hora_salida IS NULL;";
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
-            comando.Parameters.AddWithValue("@nif_empl", nif);
-            comando.Parameters.AddWithValue("@fecha_inicial", fecha_inicial);
-            comando.Parameters.AddWithValue("@fecha_final", fecha_final);
+
+            string info = "NOMBRE Y APELLIDOS-------------------ENTRADA";
 
             MySqlDataReader reader = comando.ExecuteReader();
-            TimeSpan totalHoras=  TimeSpan.Zero;
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    DateTime horaEntrada = reader.GetDateTime(0);
-                    DateTime horaSalida = reader.IsDBNull(1) ? DateTime.Now : reader.GetDateTime(1);
-                    totalHoras +=   horaEntrada.Subtract(horaSalida);
-                }
+                    info += $"{Environment.NewLine}{reader.GetString(0)} {reader.GetString(1)} \t {reader.GetDateTime(2).ToString()}";
+                } 
             }
-
-            string horasFormateadas = string.Format("{0:00}:{1:00}", (int)totalHoras.TotalHours, totalHoras.Minutes);
             reader.Close();
-
-            return horasFormateadas;
-
-
-            
+            return info;  
         }
-
     }
 }
