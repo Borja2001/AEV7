@@ -12,16 +12,27 @@ namespace AEV7
         private string nif;
         private DateTime diaHoraEntrada;
         private DateTime diaHoraSalida;
+        private TimeSpan duracion= TimeSpan.Zero;
+
+         public string Nif { get { return nif; } }
+         public DateTime DiaHoraEntrada { get { return diaHoraEntrada; } }
+        public DateTime DiaHoraSalida { get { return diaHoraSalida; } }
+        public TimeSpan Duracion { get { return duracion; } }
+
+
 
         public Fichaje(string nif)
         {
             diaHoraEntrada = DateTime.Today;
         }
-        public Fichaje(string nif,DateTime fecha_entrada,DateTime fecha_salida)
+        public Fichaje(string nif,DateTime fecha_entrada,DateTime fecha_salida, TimeSpan dur)
         {
+            this.nif = nif;
             diaHoraEntrada = fecha_entrada;
             diaHoraSalida= fecha_salida;
+            duracion = dur;
         }
+        
         public static int FicharEntrada(string nif)
         {
 
@@ -77,9 +88,10 @@ namespace AEV7
 
         }
 
-        public static string Permanencia(string nif, DateTime fecha_inicial, DateTime fecha_final)
+        public static List<Fichaje> Permanencia(string nif, DateTime fecha_inicial, DateTime fecha_final)
         {
-            string consulta = "SELECT dia_hora_entrada, dia_hora_salida FROM fichaje WHERE nif_empl = @nif_empl AND fecha BETWEEN @fecha_inicial AND @fecha_final";
+            List<Fichaje> fichajes = new List<Fichaje>();
+            string consulta = "SELECT dia_hora_entrada,dia_hora_salida FROM fichaje WHERE (nif_empl = @nif_empl) AND (dia_hora_entrada BETWEEN @fecha_inicial AND @fecha_final) and (dia_hora_salida is not null)";
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
             comando.Parameters.AddWithValue("@nif_empl", nif);
             comando.Parameters.AddWithValue("@fecha_inicial", fecha_inicial);
@@ -93,14 +105,41 @@ namespace AEV7
                 {
                     DateTime horaEntrada = reader.GetDateTime(0);
                     DateTime horaSalida = reader.IsDBNull(1) ? DateTime.Now : reader.GetDateTime(1);
-                    totalHoras += horaEntrada.Subtract(horaSalida);
+                    TimeSpan duracion= horaSalida.Subtract(horaEntrada);
+                    Fichaje fit = new Fichaje(null,horaEntrada,horaSalida,duracion);
+                    fichajes.Add(fit);
+                    totalHoras += duracion;
+                    
                 }
             }
 
-            string horasFormateadas = string.Format("{0:00}:{1:00}", (int)totalHoras.TotalHours, totalHoras.Minutes);
+            //string horasFormateadas = string.Format("{0:00}:{1:00}", (int)totalHoras.TotalHours, totalHoras.Minutes);
             reader.Close();
 
-            return horasFormateadas;
+            return fichajes;
         }
+
+        public static List<Fichaje> ListaFichajes()
+        {
+            List<Fichaje> todosLosFichajes = new List<Fichaje>();
+            string consulta = "select * from Fichaje where dia_hora_salida is not null;";
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    DateTime horaEntrada = reader.GetDateTime(1);
+                    DateTime horaSalida = reader.IsDBNull(2) ? DateTime.Now : reader.GetDateTime(2);
+                    TimeSpan duracion = horaSalida.Subtract(horaEntrada);
+                    Fichaje fit = new Fichaje(reader.GetString(0), horaEntrada, horaSalida,duracion);
+                    todosLosFichajes.Add(fit);
+                }
+            }
+            reader.Close();
+            return todosLosFichajes;
+        }
+
     }
 }

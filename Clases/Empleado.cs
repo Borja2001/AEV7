@@ -17,6 +17,11 @@ namespace AEV7
         protected string nombre;
         protected string apellidos;
 
+        public string Nif { get { return nif; } }
+        public string Nombre { get { return nombre; } }
+        public string Apellidos { get { return apellidos; } }
+
+
         public Empleado(string nif, string nom, string ape)
         {
             this.nif = nif;
@@ -44,7 +49,7 @@ namespace AEV7
 
 
 
-        public static int AgregarEmpleado(Empleado em, bool administrador, string claveadmin)
+        public virtual int AgregarEmpleado(Empleado em)
         {
 
             int retorno;
@@ -58,14 +63,30 @@ namespace AEV7
                 cmd.Parameters.AddWithValue("@nif", em.nif);
                 cmd.Parameters.AddWithValue("@nombre", em.nombre);
                 cmd.Parameters.AddWithValue("@apellidos", em.apellidos);
-                cmd.Parameters.AddWithValue("@admin", administrador);
-                cmd.Parameters.AddWithValue("@clave", claveadmin);
 
                 retorno = cmd.ExecuteNonQuery();
             }
 
             return retorno;
         }
+
+        public virtual int EliminarEmpleado( string nif)
+        {
+
+            int retorno;
+
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionBD.Conexion;
+                cmd.CommandText = "DELETE FROM empleados WHERE nif like @nif;";
+                cmd.Parameters.AddWithValue("@nif",nif);
+                retorno = cmd.ExecuteNonQuery();
+            }
+
+            return retorno;
+        }
+
+
 
 
         public static string InformacionPersona(string nif)
@@ -92,7 +113,7 @@ namespace AEV7
             string consulta = "SELECT e.nombre, e.apellidos, f.dia_hora_entrada FROM Empleados e INNER JOIN Fichaje f ON e.nif = f.nif_empl WHERE f.dia_hora_salida IS NULL;";
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
 
-            string info = "NOMBRE Y APELLIDOS-------------------ENTRADA";
+            string info = $"NOMBRE Y APELLIDOS-------------------ENTRADA{Environment.NewLine}";
 
             MySqlDataReader reader = comando.ExecuteReader();
             if (reader.HasRows)
@@ -105,5 +126,25 @@ namespace AEV7
             reader.Close();
             return info;  
         }
+
+        public static List<Empleado> ListaEmpleados()
+        {
+            List<Empleado> todosLosEmpl = new List<Empleado>();
+            string consulta = "select * from Empleados";
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Empleado emp = new Empleado(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+                    todosLosEmpl.Add(emp);
+                }
+            }
+            reader.Close();
+            return todosLosEmpl;
+        }
+
     }
 }

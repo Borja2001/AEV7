@@ -34,17 +34,19 @@ namespace AEV7
                         mantenimiento1.StartPosition = FormStartPosition.Manual;
                         mantenimiento1.Location = this.Location;
                         mantenimiento1.ShowDialog();
+                        ConexionBD.CerrarConexion();
 
                         this.Close();
                         this.Dispose();
                     }else
                     {
+                        ConexionBD.CerrarConexion();
+
                         lblError.Text = "CLAVE INCORRECTA";
                         lblError.Visible = true;
                     }
                 }
 
-                ConexionBD.CerrarConexion();
 
             }
             catch (Exception ex)

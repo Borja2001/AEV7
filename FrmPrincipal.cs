@@ -21,6 +21,11 @@ namespace AEV7
         private void Form1_Load(object sender, EventArgs e)
         {
             lblFechaHora.Text = DateTime.Now.ToString("G");
+            dttFin.Visible = false;
+            dttInicio.Visible = false;
+            lblFechaFin.Visible= false;
+            lblFechaInicio.Visible=false;
+            btnConsultaPermanencia.Visible = false;
 
         }
 
@@ -85,6 +90,11 @@ namespace AEV7
                         ConexionBD.AbrirConexion();
 
                         pbImagenPpal.Visible = false;
+                        dttFin.Visible = false;
+                        dttInicio.Visible = false;
+                        lblFechaFin.Visible = false;
+                        lblFechaInicio.Visible = false;
+                        btnConsultaPermanencia.Visible = false;
                         txtInformacion.Visible = true;
                         btnVolver.Visible = true;
 
@@ -152,6 +162,13 @@ namespace AEV7
             pbImagenPpal.Visible = true;
             txtInformacion.Visible = false;
             btnVolver.Visible = false;
+            lblFechaFin.Visible = false;
+            lblFechaInicio.Visible = false;
+            dttFin.Visible = false;
+            dttInicio.Visible = false;
+            btnConsultaPermanencia.Visible = false;
+            txtPermanencia.Visible=false;
+            dgvPermanencia.Visible = false;
         }
 
 
@@ -166,6 +183,12 @@ namespace AEV7
                     {
                         ConexionBD.AbrirConexion();
                         pbImagenPpal.Visible = false;
+                        dttFin.Visible = false;
+                        dttInicio.Visible = false;
+                        lblFechaFin.Visible = false;
+                        lblFechaInicio.Visible = false;
+                        btnConsultaPermanencia.Visible = false;
+
                         txtInformacion.Visible = true;
                         btnVolver.Visible = true;
 
@@ -230,6 +253,12 @@ namespace AEV7
                     ConexionBD.AbrirConexion();
 
                     pbImagenPpal.Visible = false;
+                    dttFin.Visible = false;
+                    dttInicio.Visible = false;
+                    lblFechaFin.Visible = false;
+                    lblFechaInicio.Visible = false;
+                    btnConsultaPermanencia.Visible = false;
+
                     txtInformacion.Visible = true;
                     btnVolver.Visible = true;
 
@@ -252,7 +281,20 @@ namespace AEV7
 
         private void btnPermanencia_Click(object sender, EventArgs e)
         {
-            /*
+            pbImagenPpal.Visible = false;
+            txtInformacion.Visible = false;
+
+
+            btnConsultaPermanencia.Visible = true;
+            btnVolver.Visible = true;
+            lblFechaInicio.Visible = true;
+            lblFechaFin .Visible = true;
+            dttInicio.Visible = true;
+            dttFin.Visible = true;
+        }
+
+        private void btnConsultaPermanencia_Click(object sender, EventArgs e)
+        {
             if (DatosValidos())
             {
                 try
@@ -260,69 +302,48 @@ namespace AEV7
                     if (ConexionBD.Conexion != null)
                     {
                         ConexionBD.AbrirConexion();
-
-                        pbImagenPpal.Visible = false;
-                        txtInformacion.Visible = true;
-                        btnVolver.Visible = true;
+                        DateTime fechaInicio = dttInicio.Value;
+                        DateTime fechaFin = dttFin.Value;
 
                         string nif = txtNIF.Text;
                         nif = nif.Replace("-", "");
 
-                        if (Empleado.Existe(nif))
-                        {
-                            DateTime? horaEntradaExistente = Fichaje.HaEntrado(nif); //En teoría con el signo ? ya no habría problema
-                            if (horaEntradaExistente == DateTime.MinValue)
-                            {
-                                int entradaCorrecta = Fichaje.P(nif);
-                                if (entradaCorrecta == 1)
-                                {
-                                   // string numeroHoras = Fichaje.Permanencia(nif,fecha_inicial,fecha_final);
-                                    //txtInformacion.Text = mensaje;
-                                    //por aqui habra errores 
-                                    //espera, lo comento porque necesito ejecutar vale
-                                }
-                                else    
-                                {
-                                    MessageBox.Show("Algo ha ido mal");
-                                }
-                            }
-                            else
-                            {
-                                string mensajeError = $"El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}";
-                                txtInformacion.Text = mensajeError;
+                        string mensaje = $"{Environment.NewLine}FECHA INICIO: {fechaInicio.ToString("d")}{Environment.NewLine}FECHA FIN: {fechaFin.ToString("d")}";
+                        mensaje += $"{Environment.NewLine}TOTAL: 2222 HORAS";
 
-                                MessageBox.Show(mensajeError, "Entrada previamente realizada");
-                            }
+                        List<Fichaje> listaPerm = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
 
-                        }
-                        else
-                        {
-                            MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                        }
-                        ConexionBD.CerrarConexion();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                    }
-                    ConexionBD.Conexion.Close();
+                        
+                        dttInicio.Visible = false;
+                        dttFin.Visible = false;
+                        lblFechaFin.Visible = false;
+                        lblFechaInicio.Visible = false;
+                        btnConsultaPermanencia.Visible = false;
+                        txtPermanencia.Visible = true;
+
+                        txtPermanencia.Text = mensaje;
+
+                        dgvPermanencia.Visible = true;
+
+                        dgvPermanencia.AutoGenerateColumns = false;
+                        dgvPermanencia.DataSource = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
+                        
+                    }                    
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
                 }
-
                 finally
                 {
                     ConexionBD.CerrarConexion();
                 }
-
-
             }
-        }*/
         }
 
     }
 }
+    
+
 

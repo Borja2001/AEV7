@@ -17,6 +17,57 @@ namespace AEV7
             InitializeComponent();
         }
 
+        private void FrmMantenimiento_Load(object sender, EventArgs e)
+        {
+            CargarListaFichajes();
+            CargarListaEmpleados();
+
+
+        }
+
+
+        private void CargarListaEmpleados()
+        {
+            try
+            {
+                if (ConexionBD.Conexion != null)
+                {
+                    ConexionBD.AbrirConexion();
+                    dgvEmpleados.DataSource = Empleado.ListaEmpleados();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+        }
+
+        private void CargarListaFichajes()
+        {
+            try
+            {
+                if (ConexionBD.Conexion != null)
+                {
+                    dgvFichajes.DataSource = Fichaje.ListaFichajes();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+        }
+
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -47,5 +98,7 @@ namespace AEV7
         {
 
         }
+
+        
     }
 }

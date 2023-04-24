@@ -33,6 +33,42 @@ namespace AEV7
 
             return claveBD == clave;
         }
+        public override int EliminarEmpleado(string nif)
+        {
+
+            int retorno;
+
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionBD.Conexion;
+                cmd.CommandText = "DELETE FROM empleados WHERE nif like @nif;";
+                cmd.Parameters.AddWithValue("@nif", nif);
+                retorno = cmd.ExecuteNonQuery();
+            }
+
+            return retorno;
+        }
+
+        /*public override int AgregarEmpleado(Empleado em, bool administrador, string claveadmin) 
+        {
+
+            int retorno;
+
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionBD.Conexion;
+                cmd.CommandText = "INSERT INTO Empleados (nif, nombre, apellidos, admin, clave) " +
+                    "VALUES (@nif, @nombre, @apellidos, @admin, @clave)";
+
+                
+                cmd.Parameters.AddWithValue("@admin", administrador);
+                cmd.Parameters.AddWithValue("@clave", claveadmin);
+
+                retorno = cmd.ExecuteNonQuery();
+            }
+
+            return retorno;
+        }*/
 
     }
 }

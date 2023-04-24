@@ -52,9 +52,7 @@
   <ItemGroup>
     <Compile Include="Clases\Administrador.cs" />
     <Compile Include="Clases\Empleado.cs" />
-    <Compile Include="Clases\ListaEmpleados.cs" />
     <Compile Include="Clases\Fichaje.cs" />
-    <Compile Include="Clases\ListaFichajes.cs" />
     <Compile Include="Clases\ConexionBD.cs" />
     <Compile Include="FrmClaveAdmin.cs">
       <SubType>Form</SubType>
@@ -74,6 +72,7 @@
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmClaveAdmin.resx">
@@ -95,6 +94,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Empleado.datasource" />
+    <None Include="Properties\DataSources\Fichaje.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMantenimiento));
@@ -36,7 +37,7 @@
             this.lblInfoEmpleados = new System.Windows.Forms.Label();
             this.lblInfoFichajes = new System.Windows.Forms.Label();
             this.dgvEmpleados = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvFichajes = new System.Windows.Forms.DataGridView();
             this.gbAltaEmpleados = new System.Windows.Forms.GroupBox();
             this.txtNIF = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -50,17 +51,27 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblGestionEmpleados = new System.Windows.Forms.Label();
+            this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fichajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.diaHoraEntradaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.diaHoraSalidaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.duracionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empleadoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).BeginInit();
             this.gbAltaEmpleados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCerrar
             // 
             this.btnCerrar.BackColor = System.Drawing.Color.Thistle;
             this.btnCerrar.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrar.Location = new System.Drawing.Point(1179, 618);
-            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCerrar.Location = new System.Drawing.Point(928, 618);
+            this.btnCerrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(219, 57);
             this.btnCerrar.TabIndex = 9;
@@ -72,8 +83,8 @@
             // 
             this.btnSalir.BackColor = System.Drawing.Color.PowderBlue;
             this.btnSalir.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(928, 618);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalir.Location = new System.Drawing.Point(1178, 618);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(219, 57);
             this.btnSalir.TabIndex = 10;
@@ -105,8 +116,10 @@
             // 
             // dgvEmpleados
             // 
+            this.dgvEmpleados.AutoGenerateColumns = false;
             this.dgvEmpleados.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmpleados.DataSource = this.empleadoBindingSource1;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -116,16 +129,23 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEmpleados.Location = new System.Drawing.Point(36, 41);
-            this.dgvEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.dgvEmpleados.Name = "dgvEmpleados";
             this.dgvEmpleados.RowHeadersWidth = 51;
             this.dgvEmpleados.Size = new System.Drawing.Size(848, 281);
             this.dgvEmpleados.TabIndex = 13;
             // 
-            // dataGridView1
+            // dgvFichajes
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFichajes.AutoGenerateColumns = false;
+            this.dgvFichajes.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvFichajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFichajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nifDataGridViewTextBoxColumn,
+            this.diaHoraEntradaDataGridViewTextBoxColumn,
+            this.diaHoraSalidaDataGridViewTextBoxColumn,
+            this.duracionDataGridViewTextBoxColumn});
+            this.dgvFichajes.DataSource = this.fichajeBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Consolas", 9.75F);
@@ -133,13 +153,13 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(36, 394);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(848, 281);
-            this.dataGridView1.TabIndex = 14;
+            this.dgvFichajes.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvFichajes.Location = new System.Drawing.Point(36, 394);
+            this.dgvFichajes.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvFichajes.Name = "dgvFichajes";
+            this.dgvFichajes.RowHeadersWidth = 51;
+            this.dgvFichajes.Size = new System.Drawing.Size(848, 281);
+            this.dgvFichajes.TabIndex = 14;
             // 
             // gbAltaEmpleados
             // 
@@ -156,9 +176,9 @@
             this.gbAltaEmpleados.Controls.Add(this.btnAgregar);
             this.gbAltaEmpleados.Controls.Add(this.lblGestionEmpleados);
             this.gbAltaEmpleados.Location = new System.Drawing.Point(928, 41);
-            this.gbAltaEmpleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAltaEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gbAltaEmpleados.Name = "gbAltaEmpleados";
-            this.gbAltaEmpleados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbAltaEmpleados.Padding = new System.Windows.Forms.Padding(4);
             this.gbAltaEmpleados.Size = new System.Drawing.Size(469, 530);
             this.gbAltaEmpleados.TabIndex = 15;
             this.gbAltaEmpleados.TabStop = false;
@@ -167,7 +187,7 @@
             // 
             this.txtNIF.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNIF.Location = new System.Drawing.Point(191, 87);
-            this.txtNIF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNIF.Margin = new System.Windows.Forms.Padding(4);
             this.txtNIF.Name = "txtNIF";
             this.txtNIF.Size = new System.Drawing.Size(236, 27);
             this.txtNIF.TabIndex = 26;
@@ -176,7 +196,7 @@
             // 
             this.txtNombre.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(191, 153);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(236, 27);
             this.txtNombre.TabIndex = 25;
@@ -185,7 +205,7 @@
             // 
             this.txtApellidos.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApellidos.Location = new System.Drawing.Point(191, 215);
-            this.txtApellidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtApellidos.Margin = new System.Windows.Forms.Padding(4);
             this.txtApellidos.Name = "txtApellidos";
             this.txtApellidos.Size = new System.Drawing.Size(236, 27);
             this.txtApellidos.TabIndex = 24;
@@ -194,7 +214,7 @@
             // 
             this.txtContraseña.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContraseña.Location = new System.Drawing.Point(191, 368);
-            this.txtContraseña.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtContraseña.Margin = new System.Windows.Forms.Padding(4);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.Size = new System.Drawing.Size(236, 27);
             this.txtContraseña.TabIndex = 23;
@@ -204,7 +224,7 @@
             this.chbAdministrador.AutoSize = true;
             this.chbAdministrador.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chbAdministrador.Location = new System.Drawing.Point(97, 287);
-            this.chbAdministrador.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbAdministrador.Margin = new System.Windows.Forms.Padding(4);
             this.chbAdministrador.Name = "chbAdministrador";
             this.chbAdministrador.Size = new System.Drawing.Size(229, 32);
             this.chbAdministrador.TabIndex = 16;
@@ -261,7 +281,7 @@
             this.btnEliminar.BackColor = System.Drawing.Color.Thistle;
             this.btnEliminar.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Location = new System.Drawing.Point(41, 455);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(140, 57);
             this.btnEliminar.TabIndex = 18;
@@ -274,7 +294,7 @@
             this.btnAgregar.BackColor = System.Drawing.Color.Thistle;
             this.btnAgregar.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Location = new System.Drawing.Point(288, 455);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(140, 57);
             this.btnAgregar.TabIndex = 17;
@@ -293,6 +313,54 @@
             this.lblGestionEmpleados.TabIndex = 16;
             this.lblGestionEmpleados.Text = "GESTIÓN DE EMPLEADOS";
             // 
+            // empleadoBindingSource
+            // 
+            this.empleadoBindingSource.DataSource = typeof(AEV7.Empleado);
+            // 
+            // fichajeBindingSource
+            // 
+            this.fichajeBindingSource.DataSource = typeof(AEV7.Fichaje);
+            // 
+            // nifDataGridViewTextBoxColumn
+            // 
+            this.nifDataGridViewTextBoxColumn.DataPropertyName = "Nif";
+            this.nifDataGridViewTextBoxColumn.HeaderText = "Nif";
+            this.nifDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nifDataGridViewTextBoxColumn.Name = "nifDataGridViewTextBoxColumn";
+            this.nifDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nifDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // diaHoraEntradaDataGridViewTextBoxColumn
+            // 
+            this.diaHoraEntradaDataGridViewTextBoxColumn.DataPropertyName = "DiaHoraEntrada";
+            this.diaHoraEntradaDataGridViewTextBoxColumn.HeaderText = "DiaHoraEntrada";
+            this.diaHoraEntradaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.diaHoraEntradaDataGridViewTextBoxColumn.Name = "diaHoraEntradaDataGridViewTextBoxColumn";
+            this.diaHoraEntradaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.diaHoraEntradaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // diaHoraSalidaDataGridViewTextBoxColumn
+            // 
+            this.diaHoraSalidaDataGridViewTextBoxColumn.DataPropertyName = "DiaHoraSalida";
+            this.diaHoraSalidaDataGridViewTextBoxColumn.HeaderText = "DiaHoraSalida";
+            this.diaHoraSalidaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.diaHoraSalidaDataGridViewTextBoxColumn.Name = "diaHoraSalidaDataGridViewTextBoxColumn";
+            this.diaHoraSalidaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.diaHoraSalidaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // duracionDataGridViewTextBoxColumn
+            // 
+            this.duracionDataGridViewTextBoxColumn.DataPropertyName = "Duracion";
+            this.duracionDataGridViewTextBoxColumn.HeaderText = "Duracion";
+            this.duracionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.duracionDataGridViewTextBoxColumn.Name = "duracionDataGridViewTextBoxColumn";
+            this.duracionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.duracionDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // empleadoBindingSource1
+            // 
+            this.empleadoBindingSource1.DataSource = typeof(AEV7.Empleado);
+            // 
             // FrmMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -300,20 +368,24 @@
             this.BackColor = System.Drawing.Color.LightYellow;
             this.ClientSize = new System.Drawing.Size(1459, 697);
             this.Controls.Add(this.gbAltaEmpleados);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvFichajes);
             this.Controls.Add(this.dgvEmpleados);
             this.Controls.Add(this.lblInfoFichajes);
             this.Controls.Add(this.lblInfoEmpleados);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnCerrar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMantenimiento";
             this.Text = "Mantenimiento";
+            this.Load += new System.EventHandler(this.FrmMantenimiento_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).EndInit();
             this.gbAltaEmpleados.ResumeLayout(false);
             this.gbAltaEmpleados.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,7 +398,7 @@
         private System.Windows.Forms.Label lblInfoEmpleados;
         private System.Windows.Forms.Label lblInfoFichajes;
         private System.Windows.Forms.DataGridView dgvEmpleados;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvFichajes;
         private System.Windows.Forms.GroupBox gbAltaEmpleados;
         private System.Windows.Forms.CheckBox chbAdministrador;
         private System.Windows.Forms.Label lblContraseña;
@@ -340,5 +412,12 @@
         private System.Windows.Forms.TextBox txtNIF;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellidos;
+        private System.Windows.Forms.BindingSource empleadoBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nifDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn diaHoraEntradaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn diaHoraSalidaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn duracionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource fichajeBindingSource;
+        private System.Windows.Forms.BindingSource empleadoBindingSource;
     }
 }
