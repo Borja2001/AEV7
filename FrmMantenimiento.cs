@@ -37,5 +37,15 @@ namespace AEV7
                 txtContraseña.Enabled = false;
             }
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
