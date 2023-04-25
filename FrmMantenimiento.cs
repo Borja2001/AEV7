@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,12 +18,135 @@ namespace AEV7
             InitializeComponent();
         }
 
+        #region VALIDACIONES
+        private bool DatosValidosAñadir()
+        {
+            bool ok = true;
+            errorMantenimiento.Clear();
+            string nif = txtNIF.Text;            
+
+            try
+            {
+                if (ConexionBD.Conexion != null)
+                {
+                    ConexionBD.AbrirConexion();
+                    if (Empleado.Existe(nif))
+                    {
+                        ok = false;
+                        errorMantenimiento.SetError(txtNIF, "EMPLEADO YA EXISTE");
+                    }
+                    ConexionBD.CerrarConexion();
+                }
+
+                if (string.IsNullOrWhiteSpace(nif))
+                {
+                    ok = false;
+                    errorMantenimiento.SetError(txtNIF, "INTRODUZCA NIF");
+                }
+                else
+                {
+                    if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif))
+                    {
+                        ok = false;
+                        errorMantenimiento.SetError(txtNIF, "NIF NO VÁLIDO");
+                    }
+                }
+
+                if (txtNombre.Text == "")
+                {
+                    ok = false;
+                    errorMantenimiento.SetError(txtNombre, "INTRODUZCA NOMBRE");
+                }
+
+                if (txtApellidos.Text == "")
+                {
+                    ok = false;
+                    errorMantenimiento.SetError(txtNombre, "INTRODUZCA APELLIDOS");
+                }
+
+                if (chbAdministrador.Checked == true && txtContrasenya.Text == "")
+                {
+                    ok = false;
+                    errorMantenimiento.SetError(txtContrasenya, "INTRODUZCA CONTRASEÑA");
+                }
+                ConexionBD.CerrarConexion();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+            return ok;
+        }
+
+        private bool DatosValidosEliminar()
+        {
+            bool ok = true;
+            errorMantenimiento.Clear();
+            string nif = txtNIF.Text;
+
+            try
+            {
+                if (ConexionBD.Conexion != null)
+                {
+                    ConexionBD.AbrirConexion();
+                    if (!Empleado.Existe(nif))
+                    {
+                        ok = false;
+                        errorMantenimiento.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                    }
+                    ConexionBD.CerrarConexion();
+                }
+
+                if (string.IsNullOrWhiteSpace(nif))
+                {
+                    ok = false;
+                    errorMantenimiento.SetError(txtNIF, "INTRODUZCA NIF");
+                }
+                else
+                {
+                    if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif))
+                    {
+                        ok = false;
+                        errorMantenimiento.SetError(txtNIF, "NIF NO VÁLIDO");
+                    }
+                }
+                ConexionBD.CerrarConexion();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+            return ok;
+        }
+
+
+        #endregion
+
         private void FrmMantenimiento_Load(object sender, EventArgs e)
         {
-            CargarListaFichajes();
             CargarListaEmpleados();
 
+            CargarListaFichajes();
 
+
+        }
+
+        private void RestablecerValores()
+        {
+            txtNombre.Text = string.Empty;
+            txtApellidos.Text = string.Empty;
+            txtContrasenya.Text = string.Empty;
+            chbAdministrador.Checked = false;
         }
 
 
@@ -33,8 +157,10 @@ namespace AEV7
                 if (ConexionBD.Conexion != null)
                 {
                     ConexionBD.AbrirConexion();
-                    dgvEmpleados.DataSource = Empleado.ListaEmpleados();
+                    List<Empleado> lista = Empleado.ListaEmpleados();
+                    dgvEmpleados.DataSource = lista;
                 }
+                ConexionBD.CerrarConexion();
 
             }
             catch (Exception ex)
@@ -53,6 +179,8 @@ namespace AEV7
             {
                 if (ConexionBD.Conexion != null)
                 {
+                    ConexionBD.AbrirConexion();
+
                     dgvFichajes.DataSource = Fichaje.ListaFichajes();
                 }
 
@@ -82,21 +210,83 @@ namespace AEV7
         {
             if (chbAdministrador.Checked == true)
             {
-                txtContraseña.Enabled = true;
+                txtContrasenya.Enabled = true;
             }else
             {
-                txtContraseña.Enabled = false;
+                txtContrasenya.Enabled = false;
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
+            if (DatosValidosAñadir())
+            {
+                try
+                {
+                    if (ConexionBD.Conexion != null)
+                    {
+                        ConexionBD.AbrirConexion();
+                        string nif = txtNIF.Text;
+                        
+
+                        if (chbAdministrador.Checked == true)
+                        {
+                            Administrador emp = new Administrador(nif, txtNombre.Text, txtApellidos.Text, txtContrasenya.Text);
+                            emp.AgregarEmpleado();
+                        }
+                        else
+                        {
+                            Empleado emp = new Empleado(nif, txtNombre.Text, txtApellidos.Text);
+                            emp.AgregarEmpleado();
+                        }
+                        RestablecerValores();
+                        ConexionBD.CerrarConexion();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+                }
+                finally
+                {
+                    ConexionBD.CerrarConexion();
+                }
+
+                CargarListaEmpleados();
+
+            }
+
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (DatosValidosEliminar())
+            {
+                try
+                {
+                    if (ConexionBD.Conexion != null)
+                    {
+                        ConexionBD.AbrirConexion();
+                        string nif = txtNIF.Text;
 
+                        Empleado.EliminarEmpleado(nif);
+
+                    }
+                    RestablecerValores();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+                }
+                finally
+                {
+                    ConexionBD.CerrarConexion();
+                }
+                CargarListaEmpleados();
+
+            }
         }
 
         

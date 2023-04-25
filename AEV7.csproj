@@ -94,6 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\Administrador.datasource" />
     <None Include="Properties\DataSources\Empleado.datasource" />
     <None Include="Properties\DataSources\Fichaje.datasource" />
     <None Include="Properties\Settings.settings">

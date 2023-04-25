@@ -11,6 +11,7 @@ namespace AEV7
     {
         private string clave;
 
+        
         public Administrador(string nif, string nom, string ape,string clave) : base(nif,nom,ape)
         {
             this.clave = clave;
@@ -33,42 +34,46 @@ namespace AEV7
 
             return claveBD == clave;
         }
-        public override int EliminarEmpleado(string nif)
+        public static bool EsAdmin(string nif)
         {
+            string consulta = string.Format("SELECT * FROM Empleados WHERE NIF LIKE @nif and admin like '1'");
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+            comando.Parameters.AddWithValue("@nif", nif);
+            MySqlDataReader reader = comando.ExecuteReader();
 
-            int retorno;
+            int num = 0;
 
-            using (var cmd = new MySqlCommand())
+            while (reader.Read())
             {
-                cmd.Connection = ConexionBD.Conexion;
-                cmd.CommandText = "DELETE FROM empleados WHERE nif like @nif;";
-                cmd.Parameters.AddWithValue("@nif", nif);
-                retorno = cmd.ExecuteNonQuery();
+                num++;
             }
+            reader.Close();
 
-            return retorno;
+            return num == 1;
         }
 
-        /*public override int AgregarEmpleado(Empleado em, bool administrador, string claveadmin) 
-        {
 
+        public override int AgregarEmpleado() 
+        {
             int retorno;
 
             using (var cmd = new MySqlCommand())
             {
                 cmd.Connection = ConexionBD.Conexion;
                 cmd.CommandText = "INSERT INTO Empleados (nif, nombre, apellidos, admin, clave) " +
-                    "VALUES (@nif, @nombre, @apellidos, @admin, @clave)";
+                    "VALUES (@nif, @nombre, @apellidos, true, @clave)";
 
-                
-                cmd.Parameters.AddWithValue("@admin", administrador);
-                cmd.Parameters.AddWithValue("@clave", claveadmin);
+                cmd.Parameters.AddWithValue("@nif", this.nif);
+                cmd.Parameters.AddWithValue("@nombre", this.nombre);
+                cmd.Parameters.AddWithValue("@apellidos", this.apellidos);
+                cmd.Parameters.AddWithValue("@clave", this.clave);
+
 
                 retorno = cmd.ExecuteNonQuery();
             }
 
             return retorno;
-        }*/
+        }
 
     }
 }

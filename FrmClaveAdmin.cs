@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mysqlx;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace AEV7
     public partial class FrmClaveAdmin : Form
     {
         private string nif;
+
         public FrmClaveAdmin(string nif)
         {
             this.nif = nif;
@@ -20,33 +22,32 @@ namespace AEV7
             txtClave.UseSystemPasswordChar = true;
         }
 
-        private void btnAcceder_Click(object sender, EventArgs e)
+        #region VALIDACIONES
+
+        private bool DatosValidos()
         {
+            bool ok = false;
+
             try
             {
+
                 if (ConexionBD.Conexion != null)
                 {
                     ConexionBD.AbrirConexion();
+
                     if (Administrador.IniciarSesion(txtClave.Text, nif))
                     {
-                        FrmMantenimiento mantenimiento1 = new FrmMantenimiento();
+                        ok = true;
 
-                        mantenimiento1.StartPosition = FormStartPosition.Manual;
-                        mantenimiento1.Location = this.Location;
-                        mantenimiento1.ShowDialog();
-                        ConexionBD.CerrarConexion();
-
-                        this.Close();
-                        this.Dispose();
                     }else
                     {
-                        ConexionBD.CerrarConexion();
+                        ok = false;
+                        errorAccesoAdmin.SetError(txtClave, "CLAVE INCORRECTA");
 
-                        lblError.Text = "CLAVE INCORRECTA";
-                        lblError.Visible = true;
                     }
-                }
 
+
+                }
 
             }
             catch (Exception ex)
@@ -56,7 +57,44 @@ namespace AEV7
             finally  // en cualquier caso cierro la conexión (haya error o no)
             {
                 ConexionBD.CerrarConexion();
+            }
+            return ok;
+        }
 
+
+        #endregion
+        private void btnAcceder_Click(object sender, EventArgs e)
+        {
+            if (DatosValidos())
+            {
+                try
+                {
+                    if (ConexionBD.Conexion != null)
+                    {
+                        ConexionBD.AbrirConexion();
+                        FrmMantenimiento mantenimiento1 = new FrmMantenimiento();
+
+                        ConexionBD.CerrarConexion();
+                        mantenimiento1.StartPosition = FormStartPosition.Manual;
+                        mantenimiento1.Location = this.Location;
+
+                        mantenimiento1.ShowDialog();
+
+                        this.Close();
+                        this.Dispose();
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+                }
+                finally  // en cualquier caso cierro la conexión (haya error o no)
+                {
+                    ConexionBD.CerrarConexion();
+
+                }
             }
 
 

@@ -42,7 +42,7 @@
             this.txtNIF = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtApellidos = new System.Windows.Forms.TextBox();
-            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.txtContrasenya = new System.Windows.Forms.TextBox();
             this.chbAdministrador = new System.Windows.Forms.CheckBox();
             this.lblContraseña = new System.Windows.Forms.Label();
             this.lblApellidos = new System.Windows.Forms.Label();
@@ -51,19 +51,26 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblGestionEmpleados = new System.Windows.Forms.Label();
-            this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fichajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaHoraEntradaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaHoraSalidaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duracionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fichajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nifDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empleadoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.empleadoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.errorMantenimiento = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).BeginInit();
             this.gbAltaEmpleados.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCerrar
@@ -117,9 +124,14 @@
             // dgvEmpleados
             // 
             this.dgvEmpleados.AutoGenerateColumns = false;
+            this.dgvEmpleados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEmpleados.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmpleados.DataSource = this.empleadoBindingSource1;
+            this.dgvEmpleados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nifDataGridViewTextBoxColumn1,
+            this.nombreDataGridViewTextBoxColumn,
+            this.apellidosDataGridViewTextBoxColumn});
+            this.dgvEmpleados.DataSource = this.empleadoBindingSource2;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,6 +150,7 @@
             // dgvFichajes
             // 
             this.dgvFichajes.AutoGenerateColumns = false;
+            this.dgvFichajes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFichajes.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvFichajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFichajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -166,7 +179,7 @@
             this.gbAltaEmpleados.Controls.Add(this.txtNIF);
             this.gbAltaEmpleados.Controls.Add(this.txtNombre);
             this.gbAltaEmpleados.Controls.Add(this.txtApellidos);
-            this.gbAltaEmpleados.Controls.Add(this.txtContraseña);
+            this.gbAltaEmpleados.Controls.Add(this.txtContrasenya);
             this.gbAltaEmpleados.Controls.Add(this.chbAdministrador);
             this.gbAltaEmpleados.Controls.Add(this.lblContraseña);
             this.gbAltaEmpleados.Controls.Add(this.lblApellidos);
@@ -210,14 +223,14 @@
             this.txtApellidos.Size = new System.Drawing.Size(236, 27);
             this.txtApellidos.TabIndex = 24;
             // 
-            // txtContraseña
+            // txtContrasenya
             // 
-            this.txtContraseña.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContraseña.Location = new System.Drawing.Point(191, 368);
-            this.txtContraseña.Margin = new System.Windows.Forms.Padding(4);
-            this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(236, 27);
-            this.txtContraseña.TabIndex = 23;
+            this.txtContrasenya.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContrasenya.Location = new System.Drawing.Point(191, 368);
+            this.txtContrasenya.Margin = new System.Windows.Forms.Padding(4);
+            this.txtContrasenya.Name = "txtContrasenya";
+            this.txtContrasenya.Size = new System.Drawing.Size(236, 27);
+            this.txtContrasenya.TabIndex = 23;
             // 
             // chbAdministrador
             // 
@@ -313,14 +326,6 @@
             this.lblGestionEmpleados.TabIndex = 16;
             this.lblGestionEmpleados.Text = "GESTIÓN DE EMPLEADOS";
             // 
-            // empleadoBindingSource
-            // 
-            this.empleadoBindingSource.DataSource = typeof(AEV7.Empleado);
-            // 
-            // fichajeBindingSource
-            // 
-            this.fichajeBindingSource.DataSource = typeof(AEV7.Fichaje);
-            // 
             // nifDataGridViewTextBoxColumn
             // 
             this.nifDataGridViewTextBoxColumn.DataPropertyName = "Nif";
@@ -328,7 +333,6 @@
             this.nifDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nifDataGridViewTextBoxColumn.Name = "nifDataGridViewTextBoxColumn";
             this.nifDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nifDataGridViewTextBoxColumn.Width = 125;
             // 
             // diaHoraEntradaDataGridViewTextBoxColumn
             // 
@@ -337,7 +341,6 @@
             this.diaHoraEntradaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.diaHoraEntradaDataGridViewTextBoxColumn.Name = "diaHoraEntradaDataGridViewTextBoxColumn";
             this.diaHoraEntradaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.diaHoraEntradaDataGridViewTextBoxColumn.Width = 125;
             // 
             // diaHoraSalidaDataGridViewTextBoxColumn
             // 
@@ -346,7 +349,6 @@
             this.diaHoraSalidaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.diaHoraSalidaDataGridViewTextBoxColumn.Name = "diaHoraSalidaDataGridViewTextBoxColumn";
             this.diaHoraSalidaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.diaHoraSalidaDataGridViewTextBoxColumn.Width = 125;
             // 
             // duracionDataGridViewTextBoxColumn
             // 
@@ -355,11 +357,50 @@
             this.duracionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.duracionDataGridViewTextBoxColumn.Name = "duracionDataGridViewTextBoxColumn";
             this.duracionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.duracionDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fichajeBindingSource
+            // 
+            this.fichajeBindingSource.DataSource = typeof(AEV7.Fichaje);
+            // 
+            // nifDataGridViewTextBoxColumn1
+            // 
+            this.nifDataGridViewTextBoxColumn1.DataPropertyName = "Nif";
+            this.nifDataGridViewTextBoxColumn1.HeaderText = "Nif";
+            this.nifDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.nifDataGridViewTextBoxColumn1.Name = "nifDataGridViewTextBoxColumn1";
+            this.nifDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // apellidosDataGridViewTextBoxColumn
+            // 
+            this.apellidosDataGridViewTextBoxColumn.DataPropertyName = "Apellidos";
+            this.apellidosDataGridViewTextBoxColumn.HeaderText = "Apellidos";
+            this.apellidosDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.apellidosDataGridViewTextBoxColumn.Name = "apellidosDataGridViewTextBoxColumn";
+            this.apellidosDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // empleadoBindingSource2
+            // 
+            this.empleadoBindingSource2.DataSource = typeof(AEV7.Empleado);
             // 
             // empleadoBindingSource1
             // 
             this.empleadoBindingSource1.DataSource = typeof(AEV7.Empleado);
+            // 
+            // empleadoBindingSource
+            // 
+            this.empleadoBindingSource.DataSource = typeof(AEV7.Empleado);
+            // 
+            // errorMantenimiento
+            // 
+            this.errorMantenimiento.ContainerControl = this;
             // 
             // FrmMantenimiento
             // 
@@ -383,9 +424,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).EndInit();
             this.gbAltaEmpleados.ResumeLayout(false);
             this.gbAltaEmpleados.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,7 +451,7 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label lblGestionEmpleados;
-        private System.Windows.Forms.TextBox txtContraseña;
+        private System.Windows.Forms.TextBox txtContrasenya;
         private System.Windows.Forms.TextBox txtNIF;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtApellidos;
@@ -419,5 +462,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn duracionDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource fichajeBindingSource;
         private System.Windows.Forms.BindingSource empleadoBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nifDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidosDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource empleadoBindingSource2;
+        private System.Windows.Forms.ErrorProvider errorMantenimiento;
     }
 }

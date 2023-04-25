@@ -16,6 +16,7 @@ namespace AEV7
         protected string nif;
         protected string nombre;
         protected string apellidos;
+        
 
         public string Nif { get { return nif; } }
         public string Nombre { get { return nombre; } }
@@ -49,7 +50,7 @@ namespace AEV7
 
 
 
-        public virtual int AgregarEmpleado(Empleado em)
+        public virtual int AgregarEmpleado()
         {
 
             int retorno;
@@ -58,11 +59,10 @@ namespace AEV7
             {
                 cmd.Connection = ConexionBD.Conexion;
                 cmd.CommandText = "INSERT INTO Empleados (nif, nombre, apellidos, admin, clave) " +
-                    "VALUES (@nif, @nombre, @apellidos, @admin, @clave)";
-
-                cmd.Parameters.AddWithValue("@nif", em.nif);
-                cmd.Parameters.AddWithValue("@nombre", em.nombre);
-                cmd.Parameters.AddWithValue("@apellidos", em.apellidos);
+                    "VALUES (@nif, @nombre, @apellidos, false,null);";
+                cmd.Parameters.AddWithValue("@nif", this.nif);
+                cmd.Parameters.AddWithValue("@nombre", this.nombre);
+                cmd.Parameters.AddWithValue("@apellidos", this.apellidos);
 
                 retorno = cmd.ExecuteNonQuery();
             }
@@ -70,7 +70,7 @@ namespace AEV7
             return retorno;
         }
 
-        public virtual int EliminarEmpleado( string nif)
+        public static int EliminarEmpleado( string nif)
         {
 
             int retorno;

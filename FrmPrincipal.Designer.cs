@@ -51,10 +51,10 @@
             this.lblFechaFin = new System.Windows.Forms.Label();
             this.txtPermanencia = new System.Windows.Forms.TextBox();
             this.dgvPermanencia = new System.Windows.Forms.DataGridView();
-            this.fichajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.diaHoraEntradaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaHoraSalidaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.duracionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fichajeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbImagenPpal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erroresPPal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermanencia)).BeginInit();
@@ -103,7 +103,7 @@
             this.btnEntrada.BackColor = System.Drawing.Color.PowderBlue;
             this.btnEntrada.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEntrada.Location = new System.Drawing.Point(1055, 159);
-            this.btnEntrada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEntrada.Margin = new System.Windows.Forms.Padding(4);
             this.btnEntrada.Name = "btnEntrada";
             this.btnEntrada.Size = new System.Drawing.Size(301, 57);
             this.btnEntrada.TabIndex = 4;
@@ -116,7 +116,7 @@
             this.btnSalida.BackColor = System.Drawing.Color.PowderBlue;
             this.btnSalida.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalida.Location = new System.Drawing.Point(1055, 258);
-            this.btnSalida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalida.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalida.Name = "btnSalida";
             this.btnSalida.Size = new System.Drawing.Size(301, 57);
             this.btnSalida.TabIndex = 5;
@@ -129,7 +129,7 @@
             this.btnPresencia.BackColor = System.Drawing.Color.PowderBlue;
             this.btnPresencia.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPresencia.Location = new System.Drawing.Point(1055, 361);
-            this.btnPresencia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPresencia.Margin = new System.Windows.Forms.Padding(4);
             this.btnPresencia.Name = "btnPresencia";
             this.btnPresencia.Size = new System.Drawing.Size(301, 57);
             this.btnPresencia.TabIndex = 6;
@@ -142,7 +142,7 @@
             this.btnPermanencia.BackColor = System.Drawing.Color.PowderBlue;
             this.btnPermanencia.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPermanencia.Location = new System.Drawing.Point(1055, 465);
-            this.btnPermanencia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPermanencia.Margin = new System.Windows.Forms.Padding(4);
             this.btnPermanencia.Name = "btnPermanencia";
             this.btnPermanencia.Size = new System.Drawing.Size(301, 57);
             this.btnPermanencia.TabIndex = 7;
@@ -155,7 +155,7 @@
             this.btnMantenimiento.BackColor = System.Drawing.Color.Thistle;
             this.btnMantenimiento.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMantenimiento.Location = new System.Drawing.Point(1055, 565);
-            this.btnMantenimiento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMantenimiento.Margin = new System.Windows.Forms.Padding(4);
             this.btnMantenimiento.Name = "btnMantenimiento";
             this.btnMantenimiento.Size = new System.Drawing.Size(301, 57);
             this.btnMantenimiento.TabIndex = 8;
@@ -167,7 +167,7 @@
             // 
             this.pbImagenPpal.Image = global::AEV7.Properties.Resources.FLORIDA_UNIVERSITARIA;
             this.pbImagenPpal.Location = new System.Drawing.Point(39, 154);
-            this.pbImagenPpal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbImagenPpal.Margin = new System.Windows.Forms.Padding(4);
             this.pbImagenPpal.Name = "pbImagenPpal";
             this.pbImagenPpal.Size = new System.Drawing.Size(813, 468);
             this.pbImagenPpal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -179,7 +179,7 @@
             this.txtInformacion.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtInformacion.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInformacion.Location = new System.Drawing.Point(39, 154);
-            this.txtInformacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInformacion.Margin = new System.Windows.Forms.Padding(4);
             this.txtInformacion.Multiline = true;
             this.txtInformacion.Name = "txtInformacion";
             this.txtInformacion.ReadOnly = true;
@@ -193,7 +193,7 @@
             this.btnVolver.BackColor = System.Drawing.Color.PowderBlue;
             this.btnVolver.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVolver.Location = new System.Drawing.Point(39, 565);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(813, 57);
             this.btnVolver.TabIndex = 11;
@@ -244,7 +244,7 @@
             this.lblFechaInicio.Font = new System.Drawing.Font("Consolas", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaInicio.Location = new System.Drawing.Point(87, 194);
             this.lblFechaInicio.Name = "lblFechaInicio";
-            this.lblFechaInicio.Size = new System.Drawing.Size(264, 40);
+            this.lblFechaInicio.Size = new System.Drawing.Size(251, 38);
             this.lblFechaInicio.TabIndex = 15;
             this.lblFechaInicio.Text = "Fecha inicio:";
             // 
@@ -254,7 +254,7 @@
             this.lblFechaFin.Font = new System.Drawing.Font("Consolas", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFechaFin.Location = new System.Drawing.Point(87, 340);
             this.lblFechaFin.Name = "lblFechaFin";
-            this.lblFechaFin.Size = new System.Drawing.Size(207, 40);
+            this.lblFechaFin.Size = new System.Drawing.Size(197, 38);
             this.lblFechaFin.TabIndex = 16;
             this.lblFechaFin.Text = "Fecha fin:";
             // 
@@ -275,6 +275,7 @@
             // dgvPermanencia
             // 
             this.dgvPermanencia.AutoGenerateColumns = false;
+            this.dgvPermanencia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPermanencia.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvPermanencia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPermanencia.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -298,10 +299,6 @@
             this.dgvPermanencia.TabIndex = 18;
             this.dgvPermanencia.Visible = false;
             // 
-            // fichajeBindingSource
-            // 
-            this.fichajeBindingSource.DataSource = typeof(AEV7.Fichaje);
-            // 
             // diaHoraEntradaDataGridViewTextBoxColumn
             // 
             this.diaHoraEntradaDataGridViewTextBoxColumn.DataPropertyName = "DiaHoraEntrada";
@@ -309,7 +306,6 @@
             this.diaHoraEntradaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.diaHoraEntradaDataGridViewTextBoxColumn.Name = "diaHoraEntradaDataGridViewTextBoxColumn";
             this.diaHoraEntradaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.diaHoraEntradaDataGridViewTextBoxColumn.Width = 125;
             // 
             // diaHoraSalidaDataGridViewTextBoxColumn
             // 
@@ -318,7 +314,6 @@
             this.diaHoraSalidaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.diaHoraSalidaDataGridViewTextBoxColumn.Name = "diaHoraSalidaDataGridViewTextBoxColumn";
             this.diaHoraSalidaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.diaHoraSalidaDataGridViewTextBoxColumn.Width = 125;
             // 
             // duracionDataGridViewTextBoxColumn
             // 
@@ -327,7 +322,10 @@
             this.duracionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.duracionDataGridViewTextBoxColumn.Name = "duracionDataGridViewTextBoxColumn";
             this.duracionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.duracionDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fichajeBindingSource
+            // 
+            this.fichajeBindingSource.DataSource = typeof(AEV7.Fichaje);
             // 
             // FrmPrincipal
             // 

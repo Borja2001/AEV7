@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilidadesNIF;
 using System.Windows.Forms;
+using Mysqlx;
 
 namespace AEV7
 {
@@ -34,27 +35,112 @@ namespace AEV7
         private bool DatosValidos()
         {
             bool ok = true;
-            erroresPPal.Clear();
 
-            string nif = txtNIF.Text;
-            nif = nif.Replace("-", "");
-            if (string.IsNullOrWhiteSpace(nif))
+            try
             {
-                ok = false;
-                erroresPPal.SetError(txtNIF, "INTRODUZCA NIF");
-            }
-            else
-            {
-                if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif))
+                if (ConexionBD.Conexion != null)
                 {
-                    ok = false;
-                    erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
+                    ConexionBD.AbrirConexion();
+
+                    erroresPPal.Clear();
+
+                    string nif = txtNIF.Text;
+                    nif = nif.Replace("-", "");
+                    if (string.IsNullOrWhiteSpace(nif))
+                    {
+                        ok = false;
+                        erroresPPal.SetError(txtNIF, "INTRODUZCA NIF");
+                    }
+                    else
+                    {
+                        if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif))
+                        {
+                            ok = false;
+                            erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
+                        }
+
+                        if (!Empleado.Existe(nif))
+                        {
+                            ok = false;
+                            erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                        }
+                    }
+
+
                 }
+                return ok;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+                return ok;
+
             }
 
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
+
+        }
 
 
-            return ok;
+        private bool DatosValidosAdmin()
+        {
+            bool ok = true;
+
+            try
+            {
+                if (ConexionBD.Conexion != null)
+                {
+                    ConexionBD.AbrirConexion();
+
+                    erroresPPal.Clear();
+
+                    string nif = txtNIF.Text;
+                    nif = nif.Replace("-", "");
+                    if (string.IsNullOrWhiteSpace(nif))
+                    {
+                        ok = false;
+                        erroresPPal.SetError(txtNIF, "INTRODUZCA NIF");
+                    }
+                    else
+                    {
+                        if (!UtilidadesNIF.Utilidad.ValidarLetraNIF(nif))
+                        {
+                            ok = false;
+                            erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
+                        }
+
+                        if (!Empleado.Existe(nif))
+                        {
+                            ok = false;
+                            erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                        }
+
+                        if (!Administrador.EsAdmin(nif))
+                        {
+                            ok = false;
+                            erroresPPal.SetError(txtNIF, "NO ERES ADMINISTRADOR");
+                        }
+                    }
+   
+
+                }
+
+                return ok;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+                return ok;
+            }
+
+            finally
+            {
+                ConexionBD.CerrarConexion();
+            }
         }
 
 
@@ -70,13 +156,16 @@ namespace AEV7
         {
             string nif = txtNIF.Text;
             nif = nif.Replace("-", "");
+            if (DatosValidosAdmin())
+            {
 
-            FrmClaveAdmin clave1 = new FrmClaveAdmin(nif);
+                FrmClaveAdmin clave1 = new FrmClaveAdmin(nif);
 
-            clave1.StartPosition = FormStartPosition.Manual;
-            clave1.Location = this.Location;
+                clave1.StartPosition = FormStartPosition.Manual;
+                clave1.Location = this.Location;
 
-            clave1.ShowDialog();
+                clave1.ShowDialog();
+            }
         }
 
         private void btnEntrada_Click(object sender, EventArgs e)
@@ -101,8 +190,7 @@ namespace AEV7
                         string nif = txtNIF.Text;
                         nif = nif.Replace("-", "");
 
-                        if (Empleado.Existe(nif))
-                        {
+                        
                             DateTime? horaEntradaExistente = Fichaje.HaEntrado(nif); //En teoría con el signo ? ya no habría problema
                             if (horaEntradaExistente == DateTime.MinValue)
                             {
@@ -123,23 +211,12 @@ namespace AEV7
                             }
                             else
                             {
-                                string mensajeError = $"El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}";
+                                string mensajeError = $"{Environment.NewLine} El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}";
                                 txtInformacion.Text = mensajeError;
-
-                                MessageBox.Show(mensajeError, "Entrada previamente realizada");
                             }
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                        }
                         ConexionBD.CerrarConexion();
                     }
-                    else
-                    {
-                        MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
-                    }
+                    
 
                 }
                 catch (Exception ex)
@@ -195,39 +272,30 @@ namespace AEV7
                         string nif = txtNIF.Text;
                         nif = nif.Replace("-", "");
 
-                        if (Empleado.Existe(nif))
-                        {
-                            DateTime horaEntradaExistente = Fichaje.HaEntrado(nif);
-                            if (horaEntradaExistente != DateTime.MinValue)
-                            {
-                                int salidaCorrecta = Fichaje.FicharSalida(nif);
-                                if (salidaCorrecta == 1)
-                                {
-                                    // Se ha realizado correctamente la salida en el fichaje
-                                    //Mostramos en el textbox Información del Empleado y la hora actual
-                                    string horaSalida = DateTime.Now.ToString("HH:mm");
-                                    string infoPersona = Empleado.InformacionPersona(nif);
-                                    string mensaje = $"{Environment.NewLine}SALIDA REALIZADA A LAS {horaSalida} {Environment.NewLine}";
-                                    mensaje += infoPersona;
 
-                                    txtInformacion.Text = mensaje;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Algo ha ido mal");
-                                }
+                        DateTime horaEntradaExistente = Fichaje.HaEntrado(nif);
+                        if (horaEntradaExistente != DateTime.MinValue)
+                        {
+                            int salidaCorrecta = Fichaje.FicharSalida(nif);
+                            if (salidaCorrecta == 1)
+                            {
+                                // Se ha realizado correctamente la salida en el fichaje
+                                //Mostramos en el textbox Información del Empleado y la hora actual
+                                string horaSalida = DateTime.Now.ToString("HH:mm");
+                                string infoPersona = Empleado.InformacionPersona(nif);
+                                string mensaje = $"{Environment.NewLine}SALIDA REALIZADA A LAS {horaSalida} {Environment.NewLine}";
+                                mensaje += infoPersona;
+
+                                txtInformacion.Text = mensaje;
                             }
                             else
                             {
-                                string mensajeError = $"El empleado con NIF {nif} no ha realizado aún su entrada.";
-                                txtInformacion.Text = mensajeError;
-                                MessageBox.Show(mensajeError, "Entrada no realizada");
+                                MessageBox.Show("Algo ha ido mal");
                             }
-
                         }
                         else
                         {
-                            MessageBox.Show("El NIF introducido no se encuentra registrado entre nuestros empleados.", "Empleado no existe");
+                            txtInformacion.Text = $"{Environment.NewLine}EL EMPLEADO NO SE ENCUENTRA TRABAJANDO.";
                         }
                     }
                 }
@@ -302,31 +370,37 @@ namespace AEV7
                     if (ConexionBD.Conexion != null)
                     {
                         ConexionBD.AbrirConexion();
+
                         DateTime fechaInicio = dttInicio.Value;
                         DateTime fechaFin = dttFin.Value;
 
                         string nif = txtNIF.Text;
                         nif = nif.Replace("-", "");
 
-                        string mensaje = $"{Environment.NewLine}FECHA INICIO: {fechaInicio.ToString("d")}{Environment.NewLine}FECHA FIN: {fechaFin.ToString("d")}";
-                        mensaje += $"{Environment.NewLine}TOTAL: 2222 HORAS";
+                       
+                            List<Fichaje> listaPerm = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
 
-                        List<Fichaje> listaPerm = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
+                            string totalHoras = Fichaje.HorasTotales(listaPerm);
 
+                            string mensaje = $"{Environment.NewLine}FECHA INICIO: {fechaInicio.ToString("d")}{Environment.NewLine}FECHA FIN: {fechaFin.ToString("d")}";
+                            mensaje += $"{Environment.NewLine}TOTAL: {totalHoras} HORAS";
+
+
+                            dttInicio.Visible = false;
+                            dttFin.Visible = false;
+                            lblFechaFin.Visible = false;
+                            lblFechaInicio.Visible = false;
+                            btnConsultaPermanencia.Visible = false;
+                            txtPermanencia.Visible = true;
+
+                            txtPermanencia.Text = mensaje;
+
+                            dgvPermanencia.Visible = true;
+
+                            dgvPermanencia.AutoGenerateColumns = false;
+                            dgvPermanencia.DataSource = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
                         
-                        dttInicio.Visible = false;
-                        dttFin.Visible = false;
-                        lblFechaFin.Visible = false;
-                        lblFechaInicio.Visible = false;
-                        btnConsultaPermanencia.Visible = false;
-                        txtPermanencia.Visible = true;
-
-                        txtPermanencia.Text = mensaje;
-
-                        dgvPermanencia.Visible = true;
-
-                        dgvPermanencia.AutoGenerateColumns = false;
-                        dgvPermanencia.DataSource = Fichaje.Permanencia(nif, fechaInicio, fechaFin);
+                        
                         
                     }                    
 

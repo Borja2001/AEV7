@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClaveAdmin));
             this.lblClave = new System.Windows.Forms.Label();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.btnAcceder = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
+            this.errorAccesoAdmin = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorAccesoAdmin)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClave
@@ -79,6 +82,10 @@
             this.lblError.Text = "...";
             this.lblError.Visible = false;
             // 
+            // errorAccesoAdmin
+            // 
+            this.errorAccesoAdmin.ContainerControl = this;
+            // 
             // FrmClaveAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -93,6 +100,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmClaveAdmin";
             this.Text = "Clave de administrador";
+            ((System.ComponentModel.ISupportInitialize)(this.errorAccesoAdmin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,5 +112,6 @@
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.Button btnAcceder;
         private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.ErrorProvider errorAccesoAdmin;
     }
 }

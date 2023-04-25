@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +119,22 @@ namespace AEV7
 
             return fichajes;
         }
+
+        public static string HorasTotales(List<Fichaje> listFichajes)
+        {
+            TimeSpan totalHoras = TimeSpan.Zero;
+
+            foreach (Fichaje item in listFichajes)
+            {
+                totalHoras += item.Duracion;
+            }
+            int horas = (int)totalHoras.TotalMinutes / 60;
+            int minutos = (int)totalHoras.TotalMinutes % 60;
+            string horasFormato = string.Format("{0:00}:{1:00}", horas, minutos);
+            return horasFormato;
+        }
+
+
 
         public static List<Fichaje> ListaFichajes()
         {
