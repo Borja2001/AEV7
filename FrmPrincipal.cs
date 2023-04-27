@@ -58,14 +58,16 @@ namespace AEV7
                             ok = false;
                             erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
                         }
-
-                        if (!Empleado.Existe(nif))
+                        else
                         {
-                            ok = false;
-                            erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                            if (!Empleado.Existe(nif))
+                            {
+                                ok = false;
+                                erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                            }
                         }
+                        
                     }
-
 
                 }
                 return ok;
@@ -185,6 +187,9 @@ namespace AEV7
                         lblFechaInicio.Visible = false;
                         btnConsultaPermanencia.Visible = false;
                         txtInformacion.Visible = true;
+                        txtPermanencia.Visible = false;
+                        dgvPermanencia.Visible = false;
+                        
                         btnVolver.Visible = true;
 
                         string nif = txtNIF.Text;
@@ -265,6 +270,8 @@ namespace AEV7
                         lblFechaFin.Visible = false;
                         lblFechaInicio.Visible = false;
                         btnConsultaPermanencia.Visible = false;
+                        txtPermanencia.Visible = false;
+                        dgvPermanencia.Visible = false;
 
                         txtInformacion.Visible = true;
                         btnVolver.Visible = true;
@@ -326,6 +333,8 @@ namespace AEV7
                     lblFechaFin.Visible = false;
                     lblFechaInicio.Visible = false;
                     btnConsultaPermanencia.Visible = false;
+                    txtPermanencia.Visible = false;
+                    dgvPermanencia.Visible = false;
 
                     txtInformacion.Visible = true;
                     btnVolver.Visible = true;
@@ -371,7 +380,8 @@ namespace AEV7
                     {
                         ConexionBD.AbrirConexion();
 
-                        DateTime fechaInicio = dttInicio.Value;
+                        DateTime fechaInicio = dttInicio.Value.Date;
+                       
                         DateTime fechaFin = dttFin.Value;
 
                         string nif = txtNIF.Text;
