@@ -30,6 +30,12 @@ namespace AEV7
             apellidos = ape;
         }
 
+
+        /// <summary>
+        /// Método que comprueba si un nif introducido coincide con el de algún empleado en la base de datos.
+        /// </summary>
+        /// <param name="nif">Se pasa por parámetro el nif introducido</param>
+        /// <returns>Devuelve el booleano según exista o no exista el nif introducido en la base de datos</returns>
         public static bool Existe(string nif)
         {
             string consulta = string.Format("SELECT * FROM Empleados WHERE NIF LIKE ('{0}')", nif);
@@ -49,7 +55,10 @@ namespace AEV7
 
 
 
-
+        /// <summary>
+        /// Método que añade un empleado en la base de datos utilizando una consulta sql.
+        /// </summary>
+        /// <returns>Devuelve el número de filas afectadas por la consulta en la base de datos</returns>
         public virtual int AgregarEmpleado()
         {
 
@@ -70,6 +79,12 @@ namespace AEV7
             return retorno;
         }
 
+
+        /// <summary>
+        /// Método que elimina un empleado de la base de datos.
+        /// </summary>
+        /// <param name="nif">Se pasa el nif del empleado a eliminar</param>
+        /// <returns>Devuelve el número de filas afectadas por la consulta en la base de datos</returns>
         public static int EliminarEmpleado( string nif)
         {
 
@@ -90,7 +105,11 @@ namespace AEV7
 
 
 
-
+        /// <summary>
+        /// Método que recoge la información relacionada con un empleado.
+        /// </summary>
+        /// <param name="nif">Se pasa como parámetro el nif del empleado del que queremos obtener la información</param>
+        /// <returns>Devuelve un string con toda la información extraída</returns>
         public static string InformacionPersona(string nif)
         {
             string consulta = "SELECT * FROM Empleados WHERE nif = @nif_empl";
@@ -110,6 +129,11 @@ namespace AEV7
             return informacion;
         }
 
+
+        /// <summary>
+        /// Método que recoge la información de todos los empleados que se encuentran trabajando o con un fichaje sin hora de salida
+        /// </summary>
+        /// <returns>Devuelve un string con toda la información</returns>
         public static string InformacionPresencia()
         {
             string consulta = "SELECT e.nombre, e.apellidos, f.dia_hora_entrada FROM Empleados e INNER JOIN Fichaje f ON e.nif = f.nif_empl WHERE f.dia_hora_salida IS NULL;";
@@ -131,6 +155,12 @@ namespace AEV7
             return info;  
         }
 
+
+
+        /// <summary>
+        /// Método que recoge todos los empleados existentes de la base de datos en una lista de empleados
+        /// </summary>
+        /// <returns>Lista de empleados</returns>
         public static List<Empleado> ListaEmpleados()
         {
             List<Empleado> todosLosEmpl = new List<Empleado>();

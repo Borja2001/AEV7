@@ -116,18 +116,24 @@ namespace AEV7
                             ok = false;
                             erroresPPal.SetError(txtNIF, "NIF NO VÁLIDO");
                         }
-
-                        if (!Empleado.Existe(nif))
+                        else
                         {
-                            ok = false;
-                            erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                            if (!Empleado.Existe(nif))
+                            {
+                                ok = false;
+                                erroresPPal.SetError(txtNIF, "EMPLEADO NO EXISTE");
+                            }
+                            else
+                            {
+                                if (!Administrador.EsAdmin(nif))
+                                {
+                                    ok = false;
+                                    erroresPPal.SetError(txtNIF, "NO ERES ADMINISTRADOR");
+                                }
+                            }
                         }
 
-                        if (!Administrador.EsAdmin(nif))
-                        {
-                            ok = false;
-                            erroresPPal.SetError(txtNIF, "NO ERES ADMINISTRADOR");
-                        }
+                        
                     }
    
 

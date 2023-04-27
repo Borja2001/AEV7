@@ -37,7 +37,9 @@ namespace AEV7
                 }
             }
 
-
+            /// <summary>
+            /// Método que abre la conexión con la base de datos
+            /// </summary>
             public static void AbrirConexion()
             {
                 if (instancia != null)
@@ -45,6 +47,9 @@ namespace AEV7
             }
 
 
+            /// <summary>
+            /// Método que cierra la conexión con la base de datos
+            /// </summary>
             public static void CerrarConexion()
             {
                 if (instancia != null)
