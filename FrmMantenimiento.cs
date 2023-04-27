@@ -61,7 +61,7 @@ namespace AEV7
                 if (txtApellidos.Text == "")
                 {
                     ok = false;
-                    errorMantenimiento.SetError(txtNombre, "INTRODUZCA APELLIDOS");
+                    errorMantenimiento.SetError(txtApellidos, "INTRODUZCA APELLIDOS");
                 }
 
                 if (chbAdministrador.Checked == true && txtContrasenya.Text == "")
@@ -158,6 +158,9 @@ namespace AEV7
                 {
                     ConexionBD.AbrirConexion();
                     List<Empleado> lista = Empleado.ListaEmpleados();
+                    List<Administrador> listaAdmin = Administrador.ListaAdministradores();
+
+                    dgvAdmin.DataSource = listaAdmin;
                     dgvEmpleados.DataSource = lista;
                 }
                 ConexionBD.CerrarConexion();
@@ -272,6 +275,7 @@ namespace AEV7
                         string nif = txtNIF.Text;
 
                         Empleado.EliminarEmpleado(nif);
+                        Fichaje.FicharSalida(nif);
 
                     }
                     RestablecerValores();

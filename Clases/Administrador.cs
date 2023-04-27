@@ -11,7 +11,7 @@ namespace AEV7
     {
         private string clave;
 
-        
+        public string Clave { get { return clave; }}
         public Administrador(string nif, string nom, string ape,string clave) : base(nif,nom,ape)
         {
             this.clave = clave;
@@ -73,6 +73,36 @@ namespace AEV7
             }
 
             return retorno;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static List<Administrador> ListaAdministradores()
+        {
+            List<Administrador> todosLosEmpl = new List<Administrador>();
+            string consulta = "select * from Empleados where clave is not null;";
+            MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
+
+            MySqlDataReader reader = comando.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    string clave = reader.GetString(4);
+                    string clave1 = "";
+                    for (int i = 0; i < clave.Length; i++)
+                    {
+                        clave1 += "*";
+                    }
+
+                    Administrador emp = new Administrador(reader.GetString(0), reader.GetString(1), reader.GetString(2),clave1);
+                    todosLosEmpl.Add(emp);
+                }
+            }
+            reader.Close();
+            return todosLosEmpl;
         }
 
     }

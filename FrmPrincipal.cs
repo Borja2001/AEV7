@@ -28,6 +28,8 @@ namespace AEV7
             lblFechaInicio.Visible=false;
             btnConsultaPermanencia.Visible = false;
 
+            dttFin.MinDate = dttInicio.Value;
+
         }
 
         #region VALIDACIONES
@@ -189,7 +191,9 @@ namespace AEV7
                         txtInformacion.Visible = true;
                         txtPermanencia.Visible = false;
                         dgvPermanencia.Visible = false;
-                        
+                        txtInformacion.BackColor = Color.White;
+                        txtInformacion.ForeColor = Color.Black;
+
                         btnVolver.Visible = true;
 
                         string nif = txtNIF.Text;
@@ -216,7 +220,9 @@ namespace AEV7
                             }
                             else
                             {
-                                string mensajeError = $"{Environment.NewLine} El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("HH:mm")}";
+                                string mensajeError = $"{Environment.NewLine} El empleado con NIF {nif} ya ha realizado su entrada en la fecha: \n {horaEntradaExistente.Value.ToString("g")}";
+                                txtInformacion.BackColor = Color.Salmon;
+                                txtInformacion.ForeColor = Color.White;
                                 txtInformacion.Text = mensajeError;
                             }
                         ConexionBD.CerrarConexion();
@@ -250,6 +256,8 @@ namespace AEV7
             dttInicio.Visible = false;
             btnConsultaPermanencia.Visible = false;
             txtPermanencia.Visible=false;
+            txtInformacion.BackColor = Color.White;
+            txtInformacion.ForeColor = Color.Black;
             dgvPermanencia.Visible = false;
         }
 
@@ -272,7 +280,8 @@ namespace AEV7
                         btnConsultaPermanencia.Visible = false;
                         txtPermanencia.Visible = false;
                         dgvPermanencia.Visible = false;
-
+                        txtInformacion.BackColor = Color.White;
+                        txtInformacion.ForeColor = Color.Black;
                         txtInformacion.Visible = true;
                         btnVolver.Visible = true;
 
@@ -302,7 +311,9 @@ namespace AEV7
                         }
                         else
                         {
-                            txtInformacion.Text = $"{Environment.NewLine}EL EMPLEADO NO SE ENCUENTRA TRABAJANDO.";
+                            txtInformacion.BackColor = Color.Salmon;
+                            txtInformacion.ForeColor = Color.White;
+                            txtInformacion.Text = $"{Environment.NewLine}EL EMPLEADO CON NIF {nif} AÚN NO HA REALIZADO SU ENTRADA.";
                         }
                     }
                 }
@@ -335,7 +346,8 @@ namespace AEV7
                     btnConsultaPermanencia.Visible = false;
                     txtPermanencia.Visible = false;
                     dgvPermanencia.Visible = false;
-
+                    txtInformacion.BackColor = Color.White;
+                    txtInformacion.ForeColor = Color.Black;
                     txtInformacion.Visible = true;
                     btnVolver.Visible = true;
 
@@ -358,16 +370,20 @@ namespace AEV7
 
         private void btnPermanencia_Click(object sender, EventArgs e)
         {
-            pbImagenPpal.Visible = false;
-            txtInformacion.Visible = false;
-
-
-            btnConsultaPermanencia.Visible = true;
-            btnVolver.Visible = true;
-            lblFechaInicio.Visible = true;
-            lblFechaFin .Visible = true;
-            dttInicio.Visible = true;
-            dttFin.Visible = true;
+            if (DatosValidos())
+            {
+                pbImagenPpal.Visible = false;
+                txtInformacion.Visible = false;
+                txtInformacion.BackColor = Color.White;
+                txtInformacion.ForeColor = Color.Black;
+                btnConsultaPermanencia.Visible = true;
+                btnVolver.Visible = true;
+                lblFechaInicio.Visible = true;
+                lblFechaFin.Visible = true;
+                dttInicio.Visible = true;
+                dttFin.Visible = true;
+            }
+           
         }
 
         private void btnConsultaPermanencia_Click(object sender, EventArgs e)
@@ -402,6 +418,8 @@ namespace AEV7
                             lblFechaInicio.Visible = false;
                             btnConsultaPermanencia.Visible = false;
                             txtPermanencia.Visible = true;
+                            txtInformacion.BackColor = Color.White;
+                            txtInformacion.ForeColor = Color.Black;
 
                             txtPermanencia.Text = mensaje;
 
@@ -426,6 +444,10 @@ namespace AEV7
             }
         }
 
+        private void dttInicio_ValueChanged(object sender, EventArgs e)
+        {
+            dttFin.MinDate = dttInicio.Value;
+        }
     }
 }
     

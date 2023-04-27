@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMantenimiento));
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -51,6 +52,13 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblGestionEmpleados = new System.Windows.Forms.Label();
+            this.errorMantenimiento = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgvAdmin = new System.Windows.Forms.DataGridView();
+            this.lblAdmin = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.administradorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaHoraEntradaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaHoraSalidaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,25 +67,29 @@
             this.nifDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.apellidosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.empleadoBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.empleadoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.empleadoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.errorMantenimiento = new System.Windows.Forms.ErrorProvider(this.components);
+            this.administradorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).BeginInit();
             this.gbAltaEmpleados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAdmin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.administradorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.administradorBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCerrar
             // 
             this.btnCerrar.BackColor = System.Drawing.Color.Thistle;
             this.btnCerrar.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrar.Location = new System.Drawing.Point(928, 618);
+            this.btnCerrar.Location = new System.Drawing.Point(928, 773);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(219, 57);
@@ -90,7 +102,7 @@
             // 
             this.btnSalir.BackColor = System.Drawing.Color.PowderBlue;
             this.btnSalir.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.Location = new System.Drawing.Point(1178, 618);
+            this.btnSalir.Location = new System.Drawing.Point(1178, 773);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(219, 57);
@@ -114,7 +126,7 @@
             // 
             this.lblInfoFichajes.AutoSize = true;
             this.lblInfoFichajes.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfoFichajes.Location = new System.Drawing.Point(31, 361);
+            this.lblInfoFichajes.Location = new System.Drawing.Point(31, 535);
             this.lblInfoFichajes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInfoFichajes.Name = "lblInfoFichajes";
             this.lblInfoFichajes.Size = new System.Drawing.Size(374, 32);
@@ -131,7 +143,7 @@
             this.nifDataGridViewTextBoxColumn1,
             this.nombreDataGridViewTextBoxColumn,
             this.apellidosDataGridViewTextBoxColumn});
-            this.dgvEmpleados.DataSource = this.empleadoBindingSource2;
+            this.dgvEmpleados.DataSource = this.empleadoBindingSource;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -140,11 +152,11 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvEmpleados.Location = new System.Drawing.Point(36, 41);
+            this.dgvEmpleados.Location = new System.Drawing.Point(37, 43);
             this.dgvEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.dgvEmpleados.Name = "dgvEmpleados";
             this.dgvEmpleados.RowHeadersWidth = 51;
-            this.dgvEmpleados.Size = new System.Drawing.Size(848, 281);
+            this.dgvEmpleados.Size = new System.Drawing.Size(848, 212);
             this.dgvEmpleados.TabIndex = 13;
             // 
             // dgvFichajes
@@ -167,11 +179,11 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvFichajes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvFichajes.Location = new System.Drawing.Point(36, 394);
+            this.dgvFichajes.Location = new System.Drawing.Point(37, 603);
             this.dgvFichajes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvFichajes.Name = "dgvFichajes";
             this.dgvFichajes.RowHeadersWidth = 51;
-            this.dgvFichajes.Size = new System.Drawing.Size(848, 281);
+            this.dgvFichajes.Size = new System.Drawing.Size(848, 227);
             this.dgvFichajes.TabIndex = 14;
             // 
             // gbAltaEmpleados
@@ -188,7 +200,7 @@
             this.gbAltaEmpleados.Controls.Add(this.btnEliminar);
             this.gbAltaEmpleados.Controls.Add(this.btnAgregar);
             this.gbAltaEmpleados.Controls.Add(this.lblGestionEmpleados);
-            this.gbAltaEmpleados.Location = new System.Drawing.Point(928, 41);
+            this.gbAltaEmpleados.Location = new System.Drawing.Point(928, 112);
             this.gbAltaEmpleados.Margin = new System.Windows.Forms.Padding(4);
             this.gbAltaEmpleados.Name = "gbAltaEmpleados";
             this.gbAltaEmpleados.Padding = new System.Windows.Forms.Padding(4);
@@ -326,6 +338,76 @@
             this.lblGestionEmpleados.TabIndex = 16;
             this.lblGestionEmpleados.Text = "GESTIÓN DE EMPLEADOS";
             // 
+            // errorMantenimiento
+            // 
+            this.errorMantenimiento.ContainerControl = this;
+            // 
+            // dgvAdmin
+            // 
+            this.dgvAdmin.AutoGenerateColumns = false;
+            this.dgvAdmin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAdmin.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dgvAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAdmin.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.Clave});
+            this.dgvAdmin.DataSource = this.administradorBindingSource1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAdmin.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvAdmin.Location = new System.Drawing.Point(37, 328);
+            this.dgvAdmin.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvAdmin.Name = "dgvAdmin";
+            this.dgvAdmin.RowHeadersWidth = 51;
+            this.dgvAdmin.Size = new System.Drawing.Size(848, 161);
+            this.dgvAdmin.TabIndex = 16;
+            // 
+            // lblAdmin
+            // 
+            this.lblAdmin.AutoSize = true;
+            this.lblAdmin.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAdmin.Location = new System.Drawing.Point(31, 277);
+            this.lblAdmin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAdmin.Name = "lblAdmin";
+            this.lblAdmin.Size = new System.Drawing.Size(479, 32);
+            this.lblAdmin.TabIndex = 17;
+            this.lblAdmin.Text = "INFORMACIÓN DE ADMINISTRADORES:";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Nif";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nif";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Nombre";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Apellidos";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Apellidos";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // administradorBindingSource
+            // 
+            this.administradorBindingSource.DataSource = typeof(AEV7.Administrador);
+            // 
             // nifDataGridViewTextBoxColumn
             // 
             this.nifDataGridViewTextBoxColumn.DataPropertyName = "Nif";
@@ -386,6 +468,10 @@
             this.apellidosDataGridViewTextBoxColumn.Name = "apellidosDataGridViewTextBoxColumn";
             this.apellidosDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // empleadoBindingSource
+            // 
+            this.empleadoBindingSource.DataSource = typeof(AEV7.Empleado);
+            // 
             // empleadoBindingSource2
             // 
             this.empleadoBindingSource2.DataSource = typeof(AEV7.Empleado);
@@ -394,20 +480,26 @@
             // 
             this.empleadoBindingSource1.DataSource = typeof(AEV7.Empleado);
             // 
-            // empleadoBindingSource
+            // administradorBindingSource1
             // 
-            this.empleadoBindingSource.DataSource = typeof(AEV7.Empleado);
+            this.administradorBindingSource1.DataSource = typeof(AEV7.Administrador);
             // 
-            // errorMantenimiento
+            // Clave
             // 
-            this.errorMantenimiento.ContainerControl = this;
+            this.Clave.DataPropertyName = "Clave";
+            this.Clave.HeaderText = "Clave";
+            this.Clave.MinimumWidth = 6;
+            this.Clave.Name = "Clave";
+            this.Clave.ReadOnly = true;
             // 
             // FrmMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightYellow;
-            this.ClientSize = new System.Drawing.Size(1459, 697);
+            this.ClientSize = new System.Drawing.Size(1459, 874);
+            this.Controls.Add(this.lblAdmin);
+            this.Controls.Add(this.dgvAdmin);
             this.Controls.Add(this.gbAltaEmpleados);
             this.Controls.Add(this.dgvFichajes);
             this.Controls.Add(this.dgvEmpleados);
@@ -424,11 +516,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvFichajes)).EndInit();
             this.gbAltaEmpleados.ResumeLayout(false);
             this.gbAltaEmpleados.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAdmin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.administradorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fichajeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.empleadoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorMantenimiento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.administradorBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,5 +562,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn apellidosDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource empleadoBindingSource2;
         private System.Windows.Forms.ErrorProvider errorMantenimiento;
+        private System.Windows.Forms.BindingSource administradorBindingSource;
+        private System.Windows.Forms.Label lblAdmin;
+        private System.Windows.Forms.DataGridView dgvAdmin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
+        private System.Windows.Forms.BindingSource administradorBindingSource1;
     }
 }

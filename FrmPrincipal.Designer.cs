@@ -228,6 +228,7 @@
             this.dttInicio.Name = "dttInicio";
             this.dttInicio.Size = new System.Drawing.Size(236, 46);
             this.dttInicio.TabIndex = 13;
+            this.dttInicio.ValueChanged += new System.EventHandler(this.dttInicio_ValueChanged);
             // 
             // dttFin
             // 
@@ -333,8 +334,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightYellow;
             this.ClientSize = new System.Drawing.Size(1459, 697);
-            this.Controls.Add(this.dgvPermanencia);
-            this.Controls.Add(this.txtPermanencia);
             this.Controls.Add(this.lblFechaFin);
             this.Controls.Add(this.lblFechaInicio);
             this.Controls.Add(this.dttFin);
@@ -351,6 +350,8 @@
             this.Controls.Add(this.lblFechaHora);
             this.Controls.Add(this.lblNIF);
             this.Controls.Add(this.txtNIF);
+            this.Controls.Add(this.dgvPermanencia);
+            this.Controls.Add(this.txtPermanencia);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmPrincipal";

@@ -81,6 +81,8 @@ namespace AEV7
                 cmd.CommandText = "DELETE FROM empleados WHERE nif like @nif;";
                 cmd.Parameters.AddWithValue("@nif",nif);
                 retorno = cmd.ExecuteNonQuery();
+
+
             }
 
             return retorno;
@@ -113,14 +115,16 @@ namespace AEV7
             string consulta = "SELECT e.nombre, e.apellidos, f.dia_hora_entrada FROM Empleados e INNER JOIN Fichaje f ON e.nif = f.nif_empl WHERE f.dia_hora_salida IS NULL;";
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
 
-            string info = $"NOMBRE Y APELLIDOS-------------------ENTRADA{Environment.NewLine}";
+            string info = $"NOMBRE Y APELLIDOS".PadRight(20);
+            info += $"ENTRADA{Environment.NewLine}".PadLeft(25);
 
             MySqlDataReader reader = comando.ExecuteReader();
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    info += $"{Environment.NewLine}{reader.GetString(0)} {reader.GetString(1)} \t {reader.GetDateTime(2).ToString()}";
+                    info += $"{Environment.NewLine}{reader.GetString(0)} {reader.GetString(1)}".PadRight(23);
+                    info += $"{reader.GetDateTime(2).ToString()}".PadLeft(22);
                 } 
             }
             reader.Close();
@@ -130,7 +134,7 @@ namespace AEV7
         public static List<Empleado> ListaEmpleados()
         {
             List<Empleado> todosLosEmpl = new List<Empleado>();
-            string consulta = "select * from Empleados";
+            string consulta = "select * from Empleados where clave is null;";
             MySqlCommand comando = new MySqlCommand(consulta, ConexionBD.Conexion);
 
             MySqlDataReader reader = comando.ExecuteReader();
