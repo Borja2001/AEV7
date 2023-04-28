@@ -58,7 +58,7 @@ namespace AEV7
 
                 retorno = cmd.ExecuteNonQuery();
             }
-
+            Log.GuardarDatosFichaje(nif,true);
             return retorno;
         }
 
@@ -83,7 +83,7 @@ namespace AEV7
                 // cmd.Parameters.AddWithValue("@salida", Convert.ToDateTime(DateTime.Now)); 
                 retorno = cmd.ExecuteNonQuery();
             }
-
+            Log.GuardarDatosFichaje(nif, false);
             return retorno;
         }
 

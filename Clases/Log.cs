@@ -11,61 +11,85 @@ namespace AEV7
     {
         public Log() { }
 
-        /*
-        public static void GuardarDatos(int id, int eleccion)
+  
+
+
+
+        /// <summary>
+        /// Método que guarda datos de fichaje de entrada o de salida en un fichero Log.
+        /// </summary>
+        /// <param name="nif">El nif del empleado</param>
+        /// <param name="entrada">true=entrada</param>
+        public static void GuardarDatosFichaje(string nif, bool entrada)
         {
             List<string> registro = RecuperarDatos();
             string ruta = NombreFichero();
-
             StreamWriter fichero = new StreamWriter(ruta);
-            if (eleccion == 1)
-                registro.Add(DateTime.Now.ToString() + " - Eliminado un usuario con Id: " + id);
+            if (entrada)
+            {
+                registro.Add(DateTime.Now.ToString() + " - Fichaje de entrada --> Nif: " + nif);
+            }else registro.Add(DateTime.Now.ToString() + " - Fichaje de salida --> Nif: " + nif);
+            
+            foreach (string emp in registro)
+            {
+                fichero.WriteLine(emp);
+            }
+            fichero.Close();
+        }
+
+        
+
+        /// <summary>
+        /// Método que guarda en un fichero Log los registros de acceso al formulario de mantenimientp
+        /// </summary>
+        /// <param name="nif">string</param>
+        public static void GuardarDatosAcceso(string nif)
+        {
+            List<string> registro = RecuperarDatos();
+            string ruta = NombreFichero();
+            StreamWriter fichero = new StreamWriter(ruta);
+            registro.Add(DateTime.Now.ToString() + " - Administrador accede a mantenimiento --> Nif: " + nif);
+            foreach (string emp in registro)
+            {
+                fichero.WriteLine(emp);
+            }
+            fichero.Close();
+        }
+
+
+
+        /// <summary>
+        /// Método que guarda datos cada vez que se añade o elimina un usuario. 
+        /// </summary>
+        /// <param name="nif">string</param>
+        /// <param name="crear">true=crear</param>
+        public static void GuardarDatosModificar(string nif, bool crear)
+        {
+            List<string> registro = RecuperarDatos();
+            string ruta = NombreFichero();
+            StreamWriter fichero = new StreamWriter(ruta);
+            
+            fichero.Close();
+            if (crear)
+            {
+                registro.Add(DateTime.Now.ToString() + " - Usuario añadido --> Nif: " + nif );
+            }
             else
-                registro.Add(DateTime.Now.ToString() + " - Insertando/Modificando un usuario con Id: " + id);
+            {
+                registro.Add(DateTime.Now.ToString() + " - Usuario eliminado --> Nif: " + nif );
 
+            }
             foreach (string emp in registro)
             {
                 fichero.WriteLine(emp);
             }
-            fichero.Close();
-        }*/
-        public static void GuardarDatos(string nombre, DateTime horaEntrada)
-        {
-            List<string> registro = RecuperarDatos();
-            string ruta = "empleados.txt";
-            StreamWriter fichero = new StreamWriter(ruta);
-            registro.Add(DateTime.Now.ToString() + " - Entrando --> Nombre: " + nombre + " -- Hora entrada:  " + horaEntrada);
-            foreach (string emp in registro)
-            {
-                fichero.WriteLine(emp);
-            }
-            fichero.Close();
+
         }
-        public static void GuardarDatos(string nombre, DateTime horaEntrada, DateTime horaSalida)
-        {
-            List<string> registro = RecuperarDatos();
-            string ruta = "empleados.txt";
-            StreamWriter fichero = new StreamWriter(ruta);
-            registro.Add(DateTime.Now.ToString() + " - Saliendo --> Nombre: " + nombre + " -- Hora entrada:  " + horaEntrada + " -- Hora salida:  " + horaSalida);
-            foreach (string emp in registro)
-            {
-                fichero.WriteLine(emp);
-            }
-            fichero.Close();
-        }/*
-        public static void GuardarDatos(string nombreAdministrador, DateTime hora, string nombreEmp)
-        {
-            List<string> registro = RecuperarDatos();
-            string ruta = "empleados.txt";
-            StreamWriter fichero = new StreamWriter(ruta);
-            registro.Add(DateTime.Now.ToString() + " - Creando --> Nombre: " + nombreAdministrador + " -- Hora entrada:  " + horaEntrada + " -- Hora salida:  " + horaSalida);
-            foreach (string emp in registro)
-            {
-                fichero.WriteLine(emp);
-            }
-            fichero.Close();
-        }
-        */
+        
+        /// <summary>
+        /// Recupera los datos del fichero para que no se pierdan al modificarlo
+        /// </summary>
+        /// <returns>El interior del fichero</returns>
         private static List<string> RecuperarDatos()
         {
             string ruta = NombreFichero();
@@ -85,6 +109,11 @@ namespace AEV7
             return texto;
         }
 
+
+        /// <summary>
+        /// Método que guarda el nombre del fichero Log con la fecha actual.
+        /// </summary>
+        /// <returns>Retorna el nombre del fichero</returns>
         private static string NombreFichero()
         {
             string fit = DateTime.Today.ToString("yyyy-MM-dd") + "log.txt";

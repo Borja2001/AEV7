@@ -237,12 +237,16 @@ namespace AEV7
                         {
                             Administrador emp = new Administrador(nif, txtNombre.Text, txtApellidos.Text, txtContrasenya.Text);
                             emp.AgregarEmpleado();
+                            
+
                         }
                         else
                         {
                             Empleado emp = new Empleado(nif, txtNombre.Text, txtApellidos.Text);
                             emp.AgregarEmpleado();
+
                         }
+                        Log.GuardarDatosModificar(nif, true);
                         RestablecerValores();
                         ConexionBD.CerrarConexion();
                     }
@@ -276,9 +280,11 @@ namespace AEV7
 
                         Empleado.EliminarEmpleado(nif);
                         Fichaje.FicharSalida(nif);
+                        Log.GuardarDatosModificar(nif, false);
 
                     }
                     RestablecerValores();
+
                 }
                 catch (Exception ex)
                 {

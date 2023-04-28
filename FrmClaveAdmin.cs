@@ -73,7 +73,7 @@ namespace AEV7
                     {
                         ConexionBD.AbrirConexion();
                         FrmMantenimiento mantenimiento1 = new FrmMantenimiento();
-
+                        Log.GuardarDatosAcceso(this.nif);
                         ConexionBD.CerrarConexion();
                         mantenimiento1.StartPosition = FormStartPosition.Manual;
                         mantenimiento1.Location = this.Location;
