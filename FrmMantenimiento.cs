@@ -138,6 +138,7 @@ namespace AEV7
 
             CargarListaFichajes();
 
+            txtContrasenya.Enabled = false;
 
         }
 

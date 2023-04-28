@@ -69,7 +69,7 @@ namespace AEV7
             string ruta = NombreFichero();
             StreamWriter fichero = new StreamWriter(ruta);
             
-            fichero.Close();
+            
             if (crear)
             {
                 registro.Add(DateTime.Now.ToString() + " - Usuario añadido --> Nif: " + nif );
@@ -83,7 +83,7 @@ namespace AEV7
             {
                 fichero.WriteLine(emp);
             }
-
+            fichero.Close();
         }
         
         /// <summary>
