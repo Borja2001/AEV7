@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="AEV7.Administrador">
+    <Position X="2" Y="4.75" Width="2.75" />
+    <InheritanceLine Type="AEV7.Empleado" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="3.375" Y="4.43" />
+        <Point X="3.375" Y="4.585" />
+        <Point X="3.375" Y="4.585" />
+        <Point X="3.375" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAgAAAABAAAAAACAAAAAAAAAAAAQAAAAEAA=</HashCode>
+      <FileName>Clases\Administrador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEV7.ConexionBD">
+    <Position X="8.75" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAQAAAAAAAgAAAAAAAAAAAAAACAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Clases\ConexionBD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEV7.Empleado">
+    <Position X="2" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAASAAACEgAAAiAAAAAAAAAIAAACABAEAAAA=</HashCode>
+      <FileName>Clases\Empleado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEV7.Fichaje">
+    <Position X="5.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgkAAAAKAAAAAgAAAwAAAgAABAAAEQQAAQAAAAAA=</HashCode>
+      <FileName>Clases\Fichaje.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AEV7.Log">
+    <Position X="8.75" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAABAAAAAAAAEAAAQAIAAAAAA=</HashCode>
+      <FileName>Clases\Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
