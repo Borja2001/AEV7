@@ -144,6 +144,7 @@ namespace AEV7
 
         private void RestablecerValores()
         {
+            txtNIF.Text = string.Empty;
             txtNombre.Text = string.Empty;
             txtApellidos.Text = string.Empty;
             txtContrasenya.Text = string.Empty;

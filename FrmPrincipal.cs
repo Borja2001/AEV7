@@ -29,6 +29,7 @@ namespace AEV7
             btnConsultaPermanencia.Visible = false;
 
             dttFin.MinDate = dttInicio.Value;
+            dttFin.MaxDate = DateTime.Now;
 
         }
 
